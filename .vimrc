@@ -54,5 +54,3 @@ set wildignore+=lib
 "
 let &t_Co=256
 colorscheme jellybeans
-
-set clipboard=unnamedplus
