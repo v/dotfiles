@@ -1,0 +1,9 @@
+[user]
+	name = Vaibhav Verma
+	email = vaibhav2614@gmail.com
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[alias]
+	d = difftool
