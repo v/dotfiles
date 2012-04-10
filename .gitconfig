@@ -7,3 +7,5 @@
 	prompt = false
 [alias]
 	d = difftool
+[core]
+	filemode = false
