@@ -10,7 +10,9 @@ set ignorecase
 set smartcase
 set autoindent
 set nohlsearch
-set autochdir
+if exists('+autochdir')
+	set autochdir
+endif
 imap jj <Esc>`^
 imap jk <Esc>
 filetype indent on
