@@ -20,3 +20,5 @@ alias tmux="TERM=xterm-256color tmux"
 # This is a lifesaver. Makes sure that your configs are loaded when you sudo.
 alias sudo="sudo -E"
 export HISTIGNORE=ls
+
+export PATH=$HOME/bin:$PATH
