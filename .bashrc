@@ -1,5 +1,7 @@
 alias LOGOUT=logout
-alias ls='ls --color=auto'
+if [ -x /usr/bin/dircolors ]; then
+	alias ls='ls --color=auto'
+fi
 unset ignoreeof
 
 export EDITOR=vim
