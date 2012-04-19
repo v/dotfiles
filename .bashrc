@@ -23,4 +23,4 @@ alias tmux="TERM=xterm-256color tmux"
 alias sudo="sudo -E"
 export HISTIGNORE=ls
 
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/bin:/usr/sbin:/sbin:$PATH
