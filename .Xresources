@@ -1,6 +1,10 @@
 URxvt*font: xft:monospace:pixelsize=12
 URxvt.perl-ext-common: default,clipboard
 
+xterm*faceName: monospace
+xterm*fontSize: 12
+XTerm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
+
 URxvt.keysym.Control-M-c: perl:clipboard:copy
 URxvt.keysym.Control-M-v: perl:clipboard:paste
 
