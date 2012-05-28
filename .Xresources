@@ -1,4 +1,4 @@
-URxvt*font: xft:monospace:pixelsize=14
+!URxvt*font: xft:monospace:pixelsize=12
 URxvt.perl-ext-common: default,clipboard
 
 xterm*faceName: monospace
