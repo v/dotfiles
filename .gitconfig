@@ -7,5 +7,6 @@
 	prompt = false
 [alias]
 	d = difftool
+	co = checkout
 [core]
 	filemode = false
