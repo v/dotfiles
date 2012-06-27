@@ -2,7 +2,6 @@ set number
 set tabstop=4
 set shiftwidth=4
 set backspace=2
-syntax on
 set pastetoggle=<F2>
 set smartindent
 set incsearch
@@ -15,8 +14,6 @@ if exists('+autochdir')
 endif
 imap jj <Esc>`^
 imap jk <Esc>
-filetype indent on
-filetype plugin on
 
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse Latex-Suite. Set your grep
@@ -55,3 +52,19 @@ set wildignore+=lib
 " }}}
 "
 let &t_Co=256
+
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
+map <leader>td <Plug>TaskList
+map <leader>dt :set makeprg=python\ manage.py\ test\|:call MakeGreen()<CR>
+map <leader>g :GundoToggle<CR>
+
+syntax on                           " syntax highlighing
+filetype on                          " try to detect filetypes
+filetype plugin indent on    " enable loading indent file for filetype
+
+au FileType python set omnifunc=pythoncomplete#Complete
+let g:SuperTabDefaultCompletionType = "context"
+
+set completeopt=menuone,longest,preview
