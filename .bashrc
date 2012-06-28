@@ -24,3 +24,4 @@ alias sudo="sudo -E"
 export HISTIGNORE=ls
 
 export PATH=$HOME/bin:/usr/sbin:/sbin:$PATH
+alias json="python -mjson.tool"
