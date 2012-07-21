@@ -1,16 +1,232 @@
-set number
-set tabstop=4
-set shiftwidth=4
+" Compatibility
+set nocompatible
+
+" Plugins
+silent! call pathogen#infect()
+silent! call pathogen#helptags()
+
+" Filetypes
+if has("autocmd")
+    filetype on
+    filetype indent on
+    filetype plugin on
+
+   " Markdown
+    augroup markdown
+        au!
+        autocmd Filetype markdown setlocal formatoptions+=t
+        autocmd Filetype markdown setlocal textwidth=79
+        if exists("&colorcolumn")
+            autocmd Filetype markdown setlocal colorcolumn=+1
+        endif
+    augroup END
+endif
+
+" Backups
+set nobackup
+if has("writebackup")
+    set nowritebackup
+endif
+
+" Colors
+if has("syntax")
+    syntax enable
+    set background=dark
+    silent! colorscheme vividchalk
+    if has("folding")
+        set fillchars=diff:\ ,fold:\ ,vert:\ 
+    endif
+    if exists("&synmaxcol")
+        set synmaxcol=3000
+    endif
+endif
+
+" Commands
+if has("cmdline_info")
+    set ruler
+    set showcmd
+    set showmode
+endif
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+
+" Completion
+inoremap <C-F> <C-X><C-F>
+inoremap <C-]> <C-X><C-]>
+
+" Encoding
+set fileformats=unix,dos,mac
+if has("multi_byte")
+    set encoding=utf-8
+endif
+
+" Formatting
 set expandtab
+set formatoptions=croqn1
+silent! set formatoptions+=j
+set smarttab
+set nojoinspaces
+set shiftround
+set shiftwidth=4
 set softtabstop=4
-set backspace=2
+set tabstop=4
+nnoremap J mzJ`z
+if has("eval")
+    function! ToggleFormatFlag(flag)
+        let l:operation = (&formatoptions =~ a:flag) ? '-=' : '+='
+        silent! exec 'setlocal formatoptions' l:operation . a:flag
+        setlocal formatoptions?
+    endfunction
+    nnoremap <silent> <leader>a :<C-U>call ToggleFormatFlag('a')<CR>
+    nnoremap <silent> <leader>c :<C-U>call ToggleFormatFlag('c')<CR>
+    nnoremap <silent> <leader>t :<C-U>call ToggleFormatFlag('t')<CR>
+endif
+
+" History
+set history=1000
+
+" List
+set nolist
+nnoremap <leader>l :setlocal list!<CR>
+
+" Matching
+silent! runtime macros/matchit.vim
+
+" Netrw
+if has("eval")
+    let g:netrw_silent = 1
+    let g:netrw_liststyle = 3
+endif
+
+" Messages
+set shortmess+=I
+
+" Miscellaneous
+set backspace=indent,eol,start
+set modelines=0
+set report=0
+
+" Numbers
+set number
+nnoremap <leader>n :setlocal number!<CR>
+
+" Objects
+onoremap ir i[
+onoremap ar a[
+vnoremap ir i[
+vnoremap ar a[
+
+" Paste
+set nopaste
 set pastetoggle=<F2>
-set smartindent
-set incsearch
-set ignorecase
-set smartcase
-set autoindent
-set nohlsearch
+
+" Reading
+set autoread
+
+" Scrolling
+set scrolloff=0
+set sidescrolloff=16
+
+" Search
+if has("extra_search")
+    set hlsearch
+    set incsearch
+    nnoremap <leader>h :set hlsearch!<CR>
+    nnoremap <leader>i :set incsearch!<CR>
+    nnoremap <C-l> :nohlsearch<CR><C-l>
+    if has("autocmd")
+        augroup vimrc
+            autocmd!
+            silent! autocmd InsertEnter * set nohlsearch
+            silent! autocmd InsertLeave * set hlsearch
+        augroup END
+    endif
+endif
+
+" Spelling
+if has("spell") 
+    set spelllang=en_us 
+    nnoremap <leader>s :setlocal spell!<CR> 
+endif
+
+
+" Terminal
+set noesckeys
+set ttyfast
+set visualbell t_vb=
+
+" Typos
+if has("user_commands")
+    command! -bang -complete=file -nargs=? E e<bang> <args>
+    command! -bang -complete=file -nargs=? W w<bang> <args>
+    command! -bang -complete=file -nargs=? WQ wq<bang> <args>
+    command! -bang -complete=file -nargs=? Wq wq<bang> <args>
+    command! -bang Q q<bang>
+    command! -bang Qa qa<bang>
+    command! -bang QA qa<bang>
+    command! -bang Wa wa<bang>
+    command! -bang WA wa<bang>
+endif
+
+" Unmaps
+noremap <F1> <nop>
+nnoremap K <nop>
+nnoremap Q <nop>
+
+" Visual
+if has("virtualedit")
+    set virtualedit+=block
+endif
+
+" Wildmenu
+if has("wildmenu")
+    set wildmenu
+    set wildmode=longest:list
+    if has("wildignore")
+        set wildignore+=*.a,*.o
+        set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
+        set wildignore+=.DS_Store,.git,.hg,.svn
+        set wildignore+=*~,*.swp,*.tmp
+    endif
+    if exists("&wildignorecase")
+        set wildignorecase
+    endif
+endif
+
+" Windows
+if has("windows")
+    set laststatus=1
+    set splitbelow
+    if has("vertsplit")
+        set splitright
+    endif
+    if exists("&showtabline")
+        set showtabline=1
+    endif
+endif
+
+" Wrapping
+set nowrap
+nnoremap j gj
+nnoremap k gk
+nnoremap <leader>w :set wrap!<CR>
+if has("linebreak")
+    set linebreak
+    set showbreak=...
+endif
+
+" Writing
+nnoremap ZW :w!<CR>
+nnoremap ZA :wa!<CR>
+
+" Yanking
+nnoremap Y y$
+
+" Local
+if filereadable(glob("~/.vimrc.local"))
+    source ~/.vimrc.local
+endif
+
 if exists('+autochdir')
 	set autochdir
 endif
@@ -29,44 +245,6 @@ let g:tex_flavor='latex'
 
 cmap w!! w !sudo tee >/dev/null %
 
-" Wildmenu completion {{{
-
-set wildmenu
-set wildmode=list:longest
-
-set wildignore+=.hg,.git,.svn                    " Version control
-set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
-set wildignore+=*.spl                            " compiled spelling word lists
-set wildignore+=*.sw?                            " Vim swap files
-set wildignore+=*.DS_Store                       " OSX bullshit
-
-set wildignore+=*.luac                           " Lua byte code
-
-set wildignore+=migrations                       " Django migrations
-set wildignore+=*.pyc                            " Python byte code
-
-" Clojure/Leiningen
-set wildignore+=classes
-set wildignore+=lib
-
-" }}}
-"
 let &t_Co=256
-
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
-
-map <leader>td <Plug>TaskList
-map <leader>dt :set makeprg=python\ manage.py\ test\|:call MakeGreen()<CR>
-map <leader>g :GundoToggle<CR>
-
-syntax on                           " syntax highlighing
-filetype on                          " try to detect filetypes
-filetype plugin indent on    " enable loading indent file for filetype
-
-au FileType python set omnifunc=pythoncomplete#Complete
-let g:SuperTabDefaultCompletionType = "context"
 
 set completeopt=menuone,longest,preview
