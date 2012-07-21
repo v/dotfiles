@@ -244,7 +244,8 @@ set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 
 cmap w!! w !sudo tee >/dev/null %
-
 let &t_Co=256
 
 set completeopt=menuone,longest,preview
+
+nnoremap <silent> <leader>m :SyntasticToggleMode<CR>
