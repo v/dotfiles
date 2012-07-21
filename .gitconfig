@@ -1,6 +1,8 @@
 [user]
 	name = Vaibhav Verma
 	email = vaibhav2614@gmail.com
+[color]
+    ui = true
 [diff]
 	tool = vimdiff
 [difftool]
@@ -10,3 +12,5 @@
 	co = checkout
 [core]
 	filemode = false
+[log]
+    date = local
