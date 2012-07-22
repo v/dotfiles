@@ -59,6 +59,8 @@ hash stty &>/dev/null && stty -ixon
 # Use completion, if available.
 [[ -e /etc/bash_completion ]] && source /etc/bash_completion
 
+export FIGNORE=$FIGNORE:.pyc:.o
+
 # SSH agent setup, if available.
 [[ -e "${HOME}/.ssh/agent" ]] && source "${HOME}/.ssh/agent"
 
