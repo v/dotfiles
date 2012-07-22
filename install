@@ -18,4 +18,4 @@ ln -fs "dotfiles/X/Xresources"         "${HOME}/.Xresources"
 if [ -e "${HOME}/.vim" ]; then
     rm -r "${HOME}/.vim"
 fi
-ln -fs ".dotfiles/vim" "${HOME}/.vim"
+ln -fs "dotfiles/vim" "${HOME}/.vim"
