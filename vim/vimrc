@@ -131,6 +131,8 @@ set sidescrolloff=16
 if has("extra_search")
     set hlsearch
     set incsearch
+    set ignorecase
+    set smartcase
     nnoremap <leader>h :set hlsearch!<CR>
     nnoremap <leader>i :set incsearch!<CR>
     nnoremap <C-l> :nohlsearch<CR><C-l>
@@ -247,5 +249,10 @@ cmap w!! w !sudo tee >/dev/null %
 let &t_Co=256
 
 set completeopt=menuone,longest,preview
+" Rope AutoComplete
+let ropevim_vim_completion = 1
+let ropevim_extended_complete = 1
+let g:ropevim_autoimport_modules = ["os.*","traceback","django.*", "xml.etree"]
+
 
 nnoremap <silent> <leader>m :SyntasticToggleMode<CR>
