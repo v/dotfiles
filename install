@@ -19,3 +19,7 @@ if [ -e "${HOME}/.vim" ]; then
     rm -r "${HOME}/.vim"
 fi
 ln -fs "dotfiles/vim" "${HOME}/.vim"
+
+if [ -e "${HOME}/.config/awesome" ]; then
+    ln -fs "dotfiles/X/awesome-rc.lua" "${HOME}/.config/awesome-rc.lua"
+fi

@@ -208,10 +208,8 @@ if has("windows")
 endif
 
 " Wrapping
-set nowrap
 nnoremap j gj
 nnoremap k gk
-nnoremap <leader>w :set wrap!<CR>
 if has("linebreak")
     set linebreak
     set showbreak=...
