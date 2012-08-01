@@ -170,7 +170,7 @@ function prompt {
         # Turn complex coloured prompt on.
         on) 
             PROMPT_COMMAND='history -a'
-            PS1='[\u@\h:\w]$(prompt return)$(prompt vcs)$(prompt jobs)\$'
+            PS1='[\u@\h:\w]$(prompt return)\$'
             PS1="${COLOR_PROMPT}${PS1}${COLOR_NORM} "
             case "$TERM" in
                 screen*) PS1='\[\ek\h\e\\\]'${PS1};;
