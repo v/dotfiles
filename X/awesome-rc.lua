@@ -218,6 +218,8 @@ globalkeys = awful.util.table.join(
 	awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn_with_shell('amixer set Master 2%-') end),
 	awful.key({ }, "XF86AudioMute", function ()  awful.util.spawn_with_shell('amixer set Master toggle')end),
 
+	awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn_with_shell('sudo /home/vverna/bin/brightness down') end),
+	awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn_with_shell('sudo /home/vverna/bin/brightness up') end),
 
     awful.key({ modkey }, "x",
               function ()
