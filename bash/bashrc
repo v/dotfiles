@@ -68,7 +68,8 @@ export FIGNORE=$FIGNORE:.pyc:.o
 DIRS="${HOME}/bin
       /usr/sbin
       /sbin
-      /filer/tmp2/contrib/bin"
+      /filer/tmp2/contrib/bin
+      $HOME/.rvm/bin"
 for DIR in $DIRS; do
     if [[ -d "$DIR" ]] && [[ ":${PATH}:" != *":${DIR}:"* ]]; then
         if [[ -n "$PATH" ]]; then
@@ -246,5 +247,3 @@ alias json="python -mjson.tool"
 
 # Start with full-fledged prompt.
 prompt on
-
-

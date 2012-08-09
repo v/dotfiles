@@ -7,6 +7,8 @@ require("beautiful")
 -- Notification library
 require("naughty")
 
+require("battery")
+
 -- Load Debian menu entries
 require("debian.menu")
 
@@ -76,6 +78,15 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" })
 
+-- Create a battery widget
+batterywidget = widget({type = "textbox", name = "batterywidget", align = "right" })
+
+bat_clo = battery.batclosure("BAT1")
+batterywidget.text = bat_clo()
+battimer = timer({ timeout = 30 })
+battimer:add_signal("timeout", function() batterywidget.text = bat_clo() end)
+battimer:start()
+
 -- Create a systray
 mysystray = widget({ type = "systray" })
 
@@ -92,6 +103,7 @@ mytaglist.buttons = awful.util.table.join(
                     awful.button({ }, 4, awful.tag.viewnext),
                     awful.button({ }, 5, awful.tag.viewprev)
                     )
+
 mytasklist = {}
 mytasklist.buttons = awful.util.table.join(
                      awful.button({ }, 1, function (c)
@@ -150,6 +162,7 @@ for s = 1, screen.count() do
         mylayoutbox[s],
         mytextclock,
         s == 1 and mysystray or nil,
+        batterywidget,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }

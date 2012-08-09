@@ -22,4 +22,5 @@ ln -fs "dotfiles/vim" "${HOME}/.vim"
 
 if [ -e "${HOME}/.config/awesome" ]; then
     ln -fs "${HOME}/dotfiles/X/awesome-rc.lua" "${HOME}/.config/awesome/rc.lua"
+    ln -fs "${HOME}/dotfiles/X/awesome-battery.lua" "${HOME}/.config/awesome/battery.lua"
 fi

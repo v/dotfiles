@@ -20,6 +20,7 @@ if has("autocmd")
             autocmd Filetype markdown setlocal colorcolumn=+1
         endif
     augroup END
+    au BufWritePost *.coffee silent CoffeeMake!
 endif
 
 " Backups
