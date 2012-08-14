@@ -231,7 +231,8 @@ if exists('+autochdir')
 	set autochdir
 endif
 imap jj <Esc>`^
-imap jk <Esc>
+imap jk <Esc>`^
+imap kj <Esc>`^
 
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse Latex-Suite. Set your grep
