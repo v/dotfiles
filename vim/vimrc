@@ -233,7 +233,6 @@ endif
 
 imap jj <Esc>`^
 imap jk <Esc>`^
-imap kj <Esc>`^
 
 map q: <cr>
 
