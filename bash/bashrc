@@ -245,7 +245,9 @@ alias json="python -mjson.tool"
 # Run local file if it exists.
 [[ -e "${HOME}/.bashrc.local" ]] && source "${HOME}/.bashrc.local"
 
-[[ -e "/usr/local/bin/virtualenvwrapper.sh" ]] && export WORKON_HOME=~/.virtualenvs && source /usr/local/bin/virtualenvwrapper.sh
+[[ -z $WORKON_HOME ]] && export WORKON_HOME=~/.virtualenvs
+
+[[ -e "/usr/local/bin/virtualenvwrapper.sh" ]] && source /usr/local/bin/virtualenvwrapper.sh
 
 # Start with full-fledged prompt.
 prompt on
