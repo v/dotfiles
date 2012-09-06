@@ -145,6 +145,7 @@ fi
 # Alias ls and grep with the options we've collected.
 alias ls="ls ${LS_OPTS}"
 alias grep="grep ${GREP_OPTS}"
+alias vi="vim"
 
 # Protect innocent MySQL databases from my stupidity.
 alias mysql='mysql --safe-updates'
