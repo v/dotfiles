@@ -249,5 +249,7 @@ alias json="python -mjson.tool"
 
 [[ -e "/usr/local/bin/virtualenvwrapper.sh" ]] && source /usr/local/bin/virtualenvwrapper.sh
 
+[[ -e "/usr/share/autojump/autojump.sh" ]] && . /usr/share/autojump/autojump.sh
+
 # Start with full-fledged prompt.
 prompt on

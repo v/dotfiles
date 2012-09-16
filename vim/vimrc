@@ -20,7 +20,6 @@ if has("autocmd")
             autocmd Filetype markdown setlocal colorcolumn=+1
         endif
     augroup END
-    au BufWritePost *.coffee silent CoffeeMake!
 endif
 
 " Backups
@@ -80,7 +79,6 @@ if has("eval")
     endfunction
     nnoremap <silent> <leader>a :<C-U>call ToggleFormatFlag('a')<CR>
     nnoremap <silent> <leader>c :<C-U>call ToggleFormatFlag('c')<CR>
-    nnoremap <silent> <leader>t :<C-U>call ToggleFormatFlag('t')<CR>
 endif
 
 " History
@@ -189,6 +187,7 @@ if has("wildmenu")
         set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
         set wildignore+=.DS_Store,.git,.hg,.svn
         set wildignore+=*~,*.swp,*.tmp
+        set wildignore+=*.pyc
     endif
     if exists("&wildignorecase")
         set wildignorecase
@@ -257,3 +256,15 @@ let g:ropevim_autoimport_modules = ["os.*","traceback","django.*", "xml.etree"]
 
 
 nnoremap <silent> <leader>m :SyntasticToggleMode<CR>
+
+func GitGrep(...)
+  let save = &grepprg
+  set grepprg=git\ grep\ -n\ $*
+  let s = 'grep'
+  for i in a:000
+    let s = s . ' ' . i
+  endfor
+  exe s
+  let &grepprg = save
+endfun
+command -nargs=? G call GitGrep(<f-args>)

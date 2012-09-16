@@ -34,3 +34,12 @@
 [submodule "vim/bundle/matchit.zip"]
 	path = vim/bundle/matchit.zip
 	url = https://github.com/vim-scripts/matchit.zip
+[submodule "vim/bundle/ctrlp.vim"]
+	path = vim/bundle/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim
+[submodule "vim/bundle/vim-stylus"]
+	path = vim/bundle/vim-stylus
+	url = https://github.com/wavded/vim-stylus
+[submodule "vim/bundle/vim-jade"]
+	path = vim/bundle/vim-jade
+	url = https://github.com/digitaltoad/vim-jade.git
