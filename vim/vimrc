@@ -259,7 +259,7 @@ nnoremap <silent> <leader>m :SyntasticToggleMode<CR>
 
 func GitGrep(...)
   let save = &grepprg
-  set grepprg=git\ grep\ -n\ $*
+  set grepprg=git\ grep\ -i\ -n\ $*
   let s = 'grep'
   for i in a:000
     let s = s . ' ' . i
@@ -268,3 +268,7 @@ func GitGrep(...)
   let &grepprg = save
 endfun
 command -nargs=? G call GitGrep(<f-args>)
+
+set laststatus=2
+let g:Powerline_symbols = 'unicode'
+set scrolloff=5
