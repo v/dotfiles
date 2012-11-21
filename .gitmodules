@@ -46,3 +46,12 @@
 [submodule "vim/bundle/vim-powerline"]
 	path = vim/bundle/vim-powerline
 	url = https://github.com/Lokaltog/vim-powerline
+[submodule "autoenv"]
+	path = autoenv
+	url = git://github.com/kennethreitz/autoenv.git
+[submodule "vim/bundle/pythoncomplete"]
+	path = vim/bundle/pythoncomplete
+	url = https://github.com/vim-scripts/pythoncomplete
+[submodule "vim/bundle/vim-virtualenv"]
+	path = vim/bundle/vim-virtualenv
+	url = https://github.com/jmcantrell/vim-virtualenv.git

@@ -272,3 +272,4 @@ command -nargs=? G call GitGrep(<f-args>)
 set laststatus=2
 let g:Powerline_symbols = 'unicode'
 set scrolloff=5
+let g:SuperTabDefaultCompletionType = "context"
