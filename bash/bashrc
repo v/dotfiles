@@ -67,8 +67,10 @@ export FIGNORE=$FIGNORE:.pyc:.o
 # Add various paths if they exist and aren't already in here.
 DIRS="${HOME}/bin
       /usr/sbin
+      /opt/play
       /sbin
       /filer/tmp2/contrib/bin
+      $HOME/maple13/bin
       $HOME/.rvm/bin"
 for DIR in $DIRS; do
     if [[ -d "$DIR" ]] && [[ ":${PATH}:" != *":${DIR}:"* ]]; then
@@ -261,6 +263,8 @@ alias sudo="sudo -E"
 
 # A nice alias for JSON viewing
 alias json="python -mjson.tool"
+
+alias racket="racket -il xrepl"
 
 # Run local file if it exists.
 [[ -e "${HOME}/.bashrc.local" ]] && source "${HOME}/.bashrc.local"

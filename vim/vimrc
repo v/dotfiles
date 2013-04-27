@@ -1,65 +1,72 @@
 " Compatibility
 set nocompatible
 
-" Plugins
-silent! call pathogen#infect()
-silent! call pathogen#helptags()
-
 " Filetypes
-if has("autocmd")
-    filetype on
-    filetype indent on
-    filetype plugin on
+filetype off
 
-   " Markdown
-    augroup markdown
-        au!
-        autocmd Filetype markdown setlocal formatoptions+=t
-        autocmd Filetype markdown setlocal textwidth=79
-        if exists("&colorcolumn")
-            autocmd Filetype markdown setlocal colorcolumn=+1
-        endif
-    augroup END
-endif
+" Backups {{{
+    set backup                        " enable backups
+    set noswapfile                    " it's 2013, Vim.
 
-" Backups
-set nobackup
-if has("writebackup")
-    set nowritebackup
-endif
+    set undodir=~/.vim/tmp/undo//     " undo files
+    set backupdir=~/.vim/tmp/backup// " backups
+    set directory=~/.vim/tmp/swap//   " swap files
 
-" Colors
-if has("syntax")
-    syntax enable
-    set background=dark
-    silent! colorscheme vividchalk
-    if has("folding")
-        set fillchars=diff:\ ,fold:\ ,vert:\ 
+    " Make those folders automatically if they don't already exist.
+    if !isdirectory(expand(&undodir))
+        call mkdir(expand(&undodir), "p")
     endif
-    if exists("&synmaxcol")
-        set synmaxcol=3000
+    if !isdirectory(expand(&backupdir))
+        call mkdir(expand(&backupdir), "p")
     endif
-endif
+    if !isdirectory(expand(&directory))
+        call mkdir(expand(&directory), "p")
+    endif
 
-" Commands
-if has("cmdline_info")
-    set ruler
-    set showcmd
-    set showmode
-endif
-cnoremap <C-A> <Home>
-cnoremap <C-E> <End>
+" }}}
 
-" Completion
-inoremap <C-F> <C-X><C-F>
-inoremap <C-]> <C-X><C-]>
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
 
-" Encoding
-set fileformats=unix,dos,mac
-if has("multi_byte")
-    set encoding=utf-8
-endif
+" All the plugins
+Bundle 'gmarik/vundle'
+Bundle 'scrooloose/syntastic'
+Bundle 'vim-scripts/matchit.zip'
+Bundle 'kien/ctrlp.vim'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'digitaltoad/vim-jade'
+Bundle 'ervandew/supertab'
+Bundle 'scrooloose/nerdtree'
 
+" All the colorschemes.
+Bundle 'sjl/badwolf'
+Bundle 'YorickPeterse/Autumn.vim'
+Bundle 'nanotech/jellybeans.vim'
+Bundle 'tomasr/molokai'
+
+filetype plugin indent on
+
+" Colorscheme Settings
+syntax on
+set synmaxcol=800
+set t_Co=256
+set background=dark
+colorscheme molokai
+
+
+"Indentation settings
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set autoindent
+set smartindent
+set smarttab
+
+"Statusline settings"
+set laststatus=2
+let g:Powerline_symbols='fancy'
+let g:Powerline_cache_enabled=1
 " Formatting
 set expandtab
 set formatoptions=croqn1
@@ -70,23 +77,27 @@ set shiftround
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
+
+
+"Convenience mappings"
+inoremap jj <Esc>`^
+inoremap JJ <Esc>`^
+inoremap jk <Esc>`^
+inoremap JK <Esc>`^
+cnoremap w!! %!sudo tee > /dev/null %
 nnoremap J mzJ`z
-if has("eval")
-    function! ToggleFormatFlag(flag)
-        let l:operation = (&formatoptions =~ a:flag) ? '-=' : '+='
-        silent! exec 'setlocal formatoptions' l:operation . a:flag
-        setlocal formatoptions?
-    endfunction
-    nnoremap <silent> <leader>a :<C-U>call ToggleFormatFlag('a')<CR>
-    nnoremap <silent> <leader>c :<C-U>call ToggleFormatFlag('c')<CR>
-endif
 
-" History
-set history=1000
+"Reasonable line movement"
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 
-" List
-set nolist
-nnoremap <leader>l :setlocal list!<CR>
+"Window movement mappings"
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
 
 " Matching
 silent! runtime macros/matchit.vim
@@ -97,6 +108,14 @@ if has("eval")
     let g:netrw_liststyle = 3
 endif
 
+"Get rid of annoying bell sound"
+set noerrorbells visualbell t_vb=
+
+"NERDTree settings"
+let NERDTreeIgnore=['\.pyc$', '\~$', '\.rbc$']
+let NERDTreeMinimalUI=1
+let NERDTreeDirArrows=1
+
 " Messages
 set shortmess+=I
 
@@ -105,9 +124,8 @@ set backspace=indent,eol,start
 set modelines=0
 set report=0
 
-" Numbers
 set number
-nnoremap <leader>n :setlocal number!<CR>
+set mouse=r
 
 " Objects
 onoremap ir i[
@@ -123,12 +141,11 @@ set pastetoggle=<F2>
 set autoread
 
 " Scrolling
-set scrolloff=0
+set scrolloff=5
 set sidescrolloff=16
 
 " Search
 if has("extra_search")
-    set hlsearch
     set incsearch
     set ignorecase
     set smartcase
@@ -188,6 +205,7 @@ if has("wildmenu")
         set wildignore+=.DS_Store,.git,.hg,.svn
         set wildignore+=*~,*.swp,*.tmp
         set wildignore+=*.pyc
+        set wildignore+=*.class
     endif
     if exists("&wildignorecase")
         set wildignorecase
@@ -196,7 +214,6 @@ endif
 
 " Windows
 if has("windows")
-    set laststatus=1
     set splitbelow
     if has("vertsplit")
         set splitright
@@ -205,18 +222,6 @@ if has("windows")
         set showtabline=1
     endif
 endif
-
-" Wrapping
-nnoremap j gj
-nnoremap k gk
-if has("linebreak")
-    set linebreak
-    set showbreak=...
-endif
-
-" Writing
-nnoremap ZW :w!<CR>
-nnoremap ZA :wa!<CR>
 
 " Yanking
 nnoremap Y y$
@@ -230,46 +235,13 @@ if exists('+autochdir')
 	set autochdir
 endif
 
-imap jj <Esc>`^
-imap jk <Esc>`^
-
 map q: <cr>
 
-" IMPORTANT: grep will sometimes skip displaying the file name if you
-" search in a singe file. This will confuse Latex-Suite. Set your grep
-" program to always generate a file-name.
-set grepprg=grep\ -nH\ $*
-
-" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
-" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-" The following changes the default filetype back to 'tex':
-let g:tex_flavor='latex'
-
-cmap w!! w !sudo tee >/dev/null %
-let &t_Co=256
-
 set completeopt=menuone,longest,preview
-" Rope AutoComplete
-let ropevim_vim_completion = 1
-let ropevim_extended_complete = 1
-let g:ropevim_autoimport_modules = ["os.*","traceback","django.*", "xml.etree"]
 
-
-nnoremap <silent> <leader>m :SyntasticToggleMode<CR>
-
-func GitGrep(...)
-  let save = &grepprg
-  set grepprg=git\ grep\ -i\ -n\ $*
-  let s = 'grep'
-  for i in a:000
-    let s = s . ' ' . i
-  endfor
-  exe s
-  let &grepprg = save
-endfun
-command -nargs=? G call GitGrep(<f-args>)
-
-set laststatus=2
+let mapleader=","
 let g:Powerline_symbols = 'unicode'
-set scrolloff=5
 let g:SuperTabDefaultCompletionType = "context"
+
+" Leader Keybindings
+nnoremap <Leader>n :NERDTreeToggle<CR>:wincmd =<CR>

@@ -1,25 +1,23 @@
 #!/usr/bin/env bash
 
-# Check out submodules. The --git-dir option doesn't work here.
-cd "${HOME}/dotfiles"
-git submodule --quiet update --init
-cd "${OLDPWD}"
+cd "${HOME}"
 
 # Link in files, replacing whatever's already there.
-ln -fs "dotfiles/bash/bashrc"       "${HOME}/.bashrc"
-ln -fs "dotfiles/bash/bash_profile" "${HOME}/.bash_profile"
-ln -fs "dotfiles/X/Xmodmap" "${HOME}/.Xmodmap"
-ln -fs "dotfiles/git/gitconfig"     "${HOME}/.gitconfig"
-ln -fs "dotfiles/git/gitignore_global"     "${HOME}/.gitignore_global"
-ln -fs "dotfiles/tmux/tmux.conf"    "${HOME}/.tmux.conf"
-ln -fs "dotfiles/vim/vimrc"         "${HOME}/.vimrc"
-ln -fs "dotfiles/X/Xresources"         "${HOME}/.Xresources"
+ln -fs "${HOME}/dotfiles/bash/bashrc"       "${HOME}/.bashrc"
+ln -fs "${HOME}/dotfiles/bash/bash_profile" "${HOME}/.bash_profile"
+ln -fs "${HOME}/dotfiles/X/Xmodmap" "${HOME}/.Xmodmap"
+ln -fs "${HOME}/dotfiles/git/gitconfig"     "${HOME}/.gitconfig"
+ln -fs "${HOME}/dotfiles/git/gitignore_global"     "${HOME}/.gitignore_global"
+ln -fs "${HOME}/dotfiles/tmux/tmux.conf"    "${HOME}/.tmux.conf"
+ln -fs "${HOME}/dotfiles/vim/vimrc"         "${HOME}/.vimrc"
+ln -fs "${HOME}/dotfiles/X/Xresources"         "${HOME}/.Xresources"
 
 # Link in directories, removing whatever's already there first.
-if [ -e "${HOME}/.vim" ]; then
-    rm -r "${HOME}/.vim"
+if [ -e "${HOME}/.vim/bundle" ]; then
+    rm -r "${HOME}/.vim/bundle"
 fi
-ln -fs "dotfiles/vim" "${HOME}/.vim"
+
+ln -fs "${HOME}/dotfiles/vim/bundle" "${HOME}/.vim/bundle"
 
 if [ -e "${HOME}/.config/awesome" ]; then
     ln -fs "${HOME}/dotfiles/X/awesome-rc.lua" "${HOME}/.config/awesome/rc.lua"
