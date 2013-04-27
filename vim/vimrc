@@ -31,7 +31,6 @@ call vundle#rc()
 " All the plugins
 Bundle 'gmarik/vundle'
 Bundle 'scrooloose/syntastic'
-Bundle 'vim-scripts/matchit.zip'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'digitaltoad/vim-jade'
