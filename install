@@ -17,8 +17,6 @@ if [ -e "${HOME}/.vim/bundle" ]; then
     rm -r "${HOME}/.vim/bundle"
 fi
 
-ln -fs "${HOME}/dotfiles/vim/bundle" "${HOME}/.vim/bundle"
-
 if [ -e "${HOME}/.config/awesome" ]; then
     ln -fs "${HOME}/dotfiles/X/awesome-rc.lua" "${HOME}/.config/awesome/rc.lua"
     ln -fs "${HOME}/dotfiles/X/awesome-battery.lua" "${HOME}/.config/awesome/battery.lua"

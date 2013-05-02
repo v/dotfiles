@@ -8,14 +8,19 @@ filetype off
     set backup                        " enable backups
     set noswapfile                    " it's 2013, Vim.
 
-    set undodir=~/.vim/tmp/undo//     " undo files
     set backupdir=~/.vim/tmp/backup// " backups
     set directory=~/.vim/tmp/swap//   " swap files
 
-    " Make those folders automatically if they don't already exist.
-    if !isdirectory(expand(&undodir))
-        call mkdir(expand(&undodir), "p")
+    if has('persistent_undo')
+        set undodir=~/.vim/tmp/undo//     " undo files
+
+
+        " Make those folders automatically if they don't already exist.
+        if !isdirectory(expand(&undodir))
+            call mkdir(expand(&undodir), "p")
+        endif
     endif
+
     if !isdirectory(expand(&backupdir))
         call mkdir(expand(&backupdir), "p")
     endif
@@ -49,7 +54,7 @@ syntax on
 set synmaxcol=800
 set t_Co=256
 set background=dark
-colorscheme molokai
+colorscheme badwolf
 
 
 "Indentation settings
