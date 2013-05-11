@@ -59,7 +59,6 @@ try
     colorscheme molokai
     colorscheme badwolf
 catch /^Vim\%((\a\+)\)\=:E185/
-    nop
 endtry
 
 
