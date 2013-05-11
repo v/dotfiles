@@ -54,7 +54,13 @@ syntax on
 set synmaxcol=800
 set t_Co=256
 set background=dark
-colorscheme badwolf
+
+try
+    colorscheme molokai
+    colorscheme badwolf
+catch /^Vim\%((\a\+)\)\=:E185/
+    nop
+endtry
 
 
 "Indentation settings

@@ -17,6 +17,11 @@ if [ -e "${HOME}/.vim/bundle" ]; then
     rm -r "${HOME}/.vim/bundle"
 fi
 
+mkdir -p "${HOME}/.vim/bundle"
+git clone git@github.com:gmarik/vundle.git "${HOME}/.vim/bundle/vundle"
+
+vim +BundleInstall +qall
+
 if [ -e "${HOME}/.config/awesome" ]; then
     ln -fs "${HOME}/dotfiles/X/awesome-rc.lua" "${HOME}/.config/awesome/rc.lua"
     ln -fs "${HOME}/dotfiles/X/awesome-battery.lua" "${HOME}/.config/awesome/battery.lua"
