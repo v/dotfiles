@@ -2,7 +2,7 @@
 [[ -z "$PS1" ]] && return
 
 # Use vi as my text editor.
-export EDITOR=vi
+export EDITOR=vim
 
 # None of this UTF8 drawing characters nonsense.
 export NCURSES_NO_UTF8_ACS=1

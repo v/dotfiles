@@ -40,6 +40,7 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'ervandew/supertab'
 Bundle 'scrooloose/nerdtree'
+Bundle 'kchmck/vim-coffee-script'
 
 " All the colorschemes.
 Bundle 'sjl/badwolf'
