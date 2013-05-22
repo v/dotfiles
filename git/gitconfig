@@ -8,6 +8,7 @@
 [difftool]
 	prompt = false
 [alias]
+    s = status
 	d = difftool
 	co = checkout
     l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
