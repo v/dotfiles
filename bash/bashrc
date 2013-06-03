@@ -124,7 +124,7 @@ GREP_OPTS=
 # If we have a color terminal, we'll use color for ls and grep.
 if [[ $COLORS -ge 8 ]]; then
     hash dircolors &>/dev/null && eval "$(dircolors -b)"
-    if ls --help | grep -- --color &>/dev/null; then
+    if ls --help 2>/dev/null | grep -- --color &>/dev/null; then
         LS_OPTS="${LS_OPTS} --color=auto"
     fi
     if grep --help | grep -- --color &>/dev/null; then
@@ -133,7 +133,7 @@ if [[ $COLORS -ge 8 ]]; then
 fi
 
 # Set up more options for grep; exclude version control files.
-if ls --help | grep -- --exclude &>/dev/null; then
+if ls --help 2>/dev/null | grep -- --exclude &>/dev/null; then
     for PATTERN in .git .gitignore .gitmodules; do
         GREP_OPTS="${GREP_OPTS} --exclude=${PATTERN}"
     done
