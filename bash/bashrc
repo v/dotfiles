@@ -71,6 +71,7 @@ DIRS="${HOME}/bin
       /sbin
       /filer/tmp2/contrib/bin
       $HOME/maple13/bin
+      /usr/local/opt/coreutils/libexec/gnubin
       $HOME/.rvm/bin"
 for DIR in $DIRS; do
     if [[ -d "$DIR" ]] && [[ ":${PATH}:" != *":${DIR}:"* ]]; then
@@ -257,6 +258,8 @@ use_env() {
     fi
   fi
 }
+
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 #some machines dont keep my sudo.
 alias sudo="sudo -E"
