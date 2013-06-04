@@ -72,6 +72,7 @@ DIRS="${HOME}/bin
       /filer/tmp2/contrib/bin
       $HOME/maple13/bin
       /usr/local/opt/coreutils/libexec/gnubin
+      $HOME/arcanist/bin
       $HOME/.rvm/bin"
 for DIR in $DIRS; do
     if [[ -d "$DIR" ]] && [[ ":${PATH}:" != *":${DIR}:"* ]]; then
@@ -176,11 +177,8 @@ function prompt {
         on) 
             PROMPT_COMMAND='history -a'
             PS1='[\u@\h:\w]$(prompt return)\$'
+            PS1='[\u@\h:\w]\$'
             PS1="${COLOR_PROMPT}${PS1}${COLOR_NORM} "
-            case "$TERM" in
-                screen*) PS1='\[\ek\h\e\\\]'${PS1};;
-                xterm*)  PS1='\[\e]0;\h\a\]'${PS1};;
-            esac
             ;;
 
         # Revert to simple inexpensive prompt.
@@ -240,25 +238,6 @@ function prompt {
     esac
 }
 
-# The use_env call below is a reusable command to activate/create a new Python
-# virtualenv, requiring only a single declarative line of code in your .env files.
-# It only performs an action if the requested virtualenv is not the current one.
-use_env() {
-  typeset venv
-  venv="$1"
-  if [[ "${VIRTUAL_ENV:t}" != "$venv" ]]; then
-    if workon | grep -q "$venv"; then
-      workon "$venv"
-    else
-      echo -n "Create virtualenv $venv now? (Yn) "
-      read answer
-      if [[ "$answer" == "Y" ]]; then
-        mkvirtualenv "$venv"
-      fi
-    fi
-  fi
-}
-
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 #some machines dont keep my sudo.
@@ -268,6 +247,7 @@ alias sudo="sudo -E"
 alias json="python -mjson.tool"
 
 alias racket="racket -il xrepl"
+alias vac="source ENV/bin/activate"
 
 # Run local file if it exists.
 [[ -e "${HOME}/.bashrc.local" ]] && source "${HOME}/.bashrc.local"
@@ -277,8 +257,6 @@ alias racket="racket -il xrepl"
 [[ -e "/usr/local/bin/virtualenvwrapper.sh" ]] && source /usr/local/bin/virtualenvwrapper.sh
 
 [[ -e "${HOME}/dotfiles/autoenv/activate.sh" ]] && source "${HOME}/dotfiles/autoenv/activate.sh"
-
-[[ -e "/usr/share/autojump/autojump.sh" ]] && . /usr/share/autojump/autojump.sh
 
 # Start with full-fledged prompt.
 prompt on
