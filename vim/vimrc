@@ -8,11 +8,11 @@ filetype off
     set backup                        " enable backups
     set noswapfile                    " it's 2013, Vim.
 
-    set backupdir=~/.vim/tmp/backup// " backups
-    set directory=~/.vim/tmp/swap//   " swap files
+    set backupdir=~/.vim/tmp/backup/ " backups
+    set directory=~/.vim/tmp/swap/   " swap files
 
     if has('persistent_undo')
-        set undodir=~/.vim/tmp/undo//     " undo files
+        set undodir=~/.vim/tmp/undo/     " undo files
 
 
         " Make those folders automatically if they don't already exist.
@@ -41,14 +41,19 @@ Bundle 'digitaltoad/vim-jade'
 Bundle 'ervandew/supertab'
 Bundle 'scrooloose/nerdtree'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'tpope/vim-fugitive'
+Bundle 'scrooloose/nerdcommenter'
 
 " All the colorschemes.
 Bundle 'sjl/badwolf'
 Bundle 'YorickPeterse/Autumn.vim'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'tomasr/molokai'
+Bundle 'altercation/vim-colors-solarized'
 
 filetype plugin indent on
+
+let mapleader=","
 
 " Colorscheme Settings
 syntax on
@@ -77,15 +82,9 @@ set laststatus=2
 let g:Powerline_symbols='fancy'
 let g:Powerline_cache_enabled=1
 " Formatting
-set expandtab
 set formatoptions=croqn1
 silent! set formatoptions+=j
-set smarttab
 set nojoinspaces
-set shiftround
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
 
 
 "Convenience mappings"
@@ -248,7 +247,6 @@ map q: <cr>
 
 set completeopt=menuone,longest,preview
 
-let mapleader=","
 let g:Powerline_symbols = 'unicode'
 let g:SuperTabDefaultCompletionType = "context"
 

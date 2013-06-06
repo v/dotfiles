@@ -66,6 +66,7 @@ export FIGNORE=$FIGNORE:.pyc:.o
 
 # Add various paths if they exist and aren't already in here.
 DIRS="${HOME}/bin
+      /usr/local/bin
       /usr/sbin
       /opt/play
       /sbin
@@ -255,8 +256,6 @@ alias vac="source ENV/bin/activate"
 [[ -z $WORKON_HOME ]] && export WORKON_HOME=~/.virtualenvs
 
 [[ -e "/usr/local/bin/virtualenvwrapper.sh" ]] && source /usr/local/bin/virtualenvwrapper.sh
-
-[[ -e "${HOME}/dotfiles/autoenv/activate.sh" ]] && source "${HOME}/dotfiles/autoenv/activate.sh"
 
 # Start with full-fledged prompt.
 prompt on
