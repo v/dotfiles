@@ -50,6 +50,7 @@ Bundle 'YorickPeterse/Autumn.vim'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'tomasr/molokai'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'chriskempson/vim-tomorrow-theme'
 
 filetype plugin indent on
 
@@ -157,16 +158,10 @@ if has("extra_search")
     set incsearch
     set ignorecase
     set smartcase
+    set nohlsearch
     nnoremap <leader>h :set hlsearch!<CR>
     nnoremap <leader>i :set incsearch!<CR>
     nnoremap <C-l> :nohlsearch<CR><C-l>
-    if has("autocmd")
-        augroup vimrc
-            autocmd!
-            silent! autocmd InsertEnter * set nohlsearch
-            silent! autocmd InsertLeave * set hlsearch
-        augroup END
-    endif
 endif
 
 " Spelling
@@ -252,3 +247,4 @@ let g:SuperTabDefaultCompletionType = "context"
 
 " Leader Keybindings
 nnoremap <Leader>n :NERDTreeToggle<CR>:wincmd =<CR>
+nnoremap == <C-w>=
