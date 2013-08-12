@@ -38,11 +38,13 @@ Bundle 'scrooloose/syntastic'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'digitaltoad/vim-jade'
-Bundle 'ervandew/supertab'
 Bundle 'scrooloose/nerdtree'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdcommenter'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'SirVer/ultisnips'
+Bundle 'myusuf3/numbers.vim'
 
 " All the colorschemes.
 Bundle 'sjl/badwolf'
@@ -244,6 +246,7 @@ set completeopt=menuone,longest,preview
 
 let g:Powerline_symbols = 'unicode'
 let g:SuperTabDefaultCompletionType = "context"
+let g:EclimCompletionMethod = 'omnifunc'
 
 " Leader Keybindings
 nnoremap <Leader>n :NERDTreeToggle<CR>:wincmd =<CR>
