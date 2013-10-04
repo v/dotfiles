@@ -72,7 +72,7 @@ DIRS="${HOME}/bin
       /sbin
       /filer/tmp2/contrib/bin
       $HOME/maple13/bin
-      /usr/local/opt/coreutils/libexec/gnubin
+      /usr/local/Cellar/coreutils/8.19/libexec/gnubin
       $HOME/arcanist/bin
       $HOME/.rvm/bin"
 for DIR in $DIRS; do
