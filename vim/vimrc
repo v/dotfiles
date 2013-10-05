@@ -43,6 +43,9 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdcommenter'
+Bundle 'itspriddle/vim-stripper'
+Bundle 'xsbeats/vim-blade'
+Bundle 'LaTeX-Box-Team/LaTeX-Box'
 
 " All the colorschemes.
 Bundle 'sjl/badwolf'
@@ -75,7 +78,6 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
-set smartindent
 set smarttab
 
 "Statusline settings"
@@ -165,9 +167,9 @@ if has("extra_search")
 endif
 
 " Spelling
-if has("spell") 
-    set spelllang=en_us 
-    nnoremap <leader>s :setlocal spell!<CR> 
+if has("spell")
+    set spelllang=en_us
+    nnoremap <leader>s :setlocal spell!<CR>
 endif
 
 
@@ -238,6 +240,9 @@ if exists('+autochdir')
 	set autochdir
 endif
 
+" Compile Latex when I save it.
+au BufWritePost *.tex "silent !pdflatex %"
+
 map q: <cr>
 
 set completeopt=menuone,longest,preview
@@ -248,3 +253,6 @@ let g:SuperTabDefaultCompletionType = "context"
 " Leader Keybindings
 nnoremap <Leader>n :NERDTreeToggle<CR>:wincmd =<CR>
 nnoremap == <C-w>=
+
+" Clear ctrlp cache
+nnoremap <silent> <leader>t :ClearCtrlPCache<cr>\|:CtrlP<cr>
