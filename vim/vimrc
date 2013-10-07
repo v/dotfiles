@@ -253,6 +253,7 @@ let g:SuperTabDefaultCompletionType = "context"
 " Leader Keybindings
 nnoremap <Leader>n :NERDTreeToggle<CR>:wincmd =<CR>
 nnoremap == <C-w>=
+inoremap pdb import pdb; pdb.set_trace()
 
 " Clear ctrlp cache
 nnoremap <silent> <leader>t :ClearCtrlPCache<cr>\|:CtrlP<cr>
