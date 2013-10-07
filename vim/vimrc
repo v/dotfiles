@@ -42,8 +42,9 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'SirVer/ultisnips'
+Bundle 'itspriddle/vim-stripper'
+Bundle 'xsbeats/vim-blade'
+Bundle 'LaTeX-Box-Team/LaTeX-Box'
 Bundle 'myusuf3/numbers.vim'
 
 " All the colorschemes.
@@ -77,7 +78,6 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
-set smartindent
 set smarttab
 
 "Statusline settings"
@@ -167,9 +167,9 @@ if has("extra_search")
 endif
 
 " Spelling
-if has("spell") 
-    set spelllang=en_us 
-    nnoremap <leader>s :setlocal spell!<CR> 
+if has("spell")
+    set spelllang=en_us
+    nnoremap <leader>s :setlocal spell!<CR>
 endif
 
 
@@ -240,6 +240,9 @@ if exists('+autochdir')
 	set autochdir
 endif
 
+" Compile Latex when I save it.
+au BufWritePost *.tex "silent !pdflatex %"
+
 map q: <cr>
 
 set completeopt=menuone,longest,preview
@@ -251,3 +254,7 @@ let g:EclimCompletionMethod = 'omnifunc'
 " Leader Keybindings
 nnoremap <Leader>n :NERDTreeToggle<CR>:wincmd =<CR>
 nnoremap == <C-w>=
+inoremap pdb import pdb; pdb.set_trace()
+
+" Clear ctrlp cache
+nnoremap <silent> <leader>t :ClearCtrlPCache<cr>\|:CtrlP<cr>

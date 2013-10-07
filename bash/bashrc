@@ -59,7 +59,7 @@ hash stty &>/dev/null && stty -ixon
 # Use completion, if available.
 [[ -e /etc/bash_completion ]] && source /etc/bash_completion
 
-export FIGNORE=$FIGNORE:.pyc:.o
+export FIGNORE=$FIGNORE:.pyc:.o:.gitignore
 
 # SSH agent setup, if available.
 [[ -e "${HOME}/.ssh/agent" ]] && source "${HOME}/.ssh/agent"
@@ -75,6 +75,7 @@ DIRS="${HOME}/bin
       /usr/local/Cellar/coreutils/8.19/libexec/gnubin
       /usr/local/Cellar/ruby/1.9.3-p194/bin
       $HOME/arcanist/bin
+      $HOME/.rvm/gems/ruby-1.9.2-p320/bin
       $HOME/.rvm/bin"
 for DIR in $DIRS; do
     if [[ -d "$DIR" ]] && [[ ":${PATH}:" != *":${DIR}:"* ]]; then
@@ -176,7 +177,7 @@ function prompt {
     case "$1" in
 
         # Turn complex coloured prompt on.
-        on) 
+        on)
             PROMPT_COMMAND='history -a'
             PS1='[\u@\h:\w]$(prompt return)\$'
             PS1='[\u@\h:\w]\$'
@@ -229,7 +230,7 @@ function prompt {
 
         # Return status prompt function.
         return)
-            RETURN=$? 
+            RETURN=$?
             [[ $RETURN -ne 0 ]] && printf '<%d>' ${RETURN}
             ;;
 
@@ -260,3 +261,5 @@ alias vac="source ENV/bin/activate"
 
 # Start with full-fledged prompt.
 prompt on
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
