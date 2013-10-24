@@ -46,6 +46,7 @@ Bundle 'itspriddle/vim-stripper'
 Bundle 'xsbeats/vim-blade'
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 Bundle 'myusuf3/numbers.vim'
+Bundle 'ervandew/supertab'
 
 " All the colorschemes.
 Bundle 'sjl/badwolf'
