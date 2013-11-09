@@ -42,9 +42,10 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'Valloric/YouCompleteMe'
 Bundle 'SirVer/ultisnips'
 Bundle 'myusuf3/numbers.vim'
+Bundle 'ervandew/supertab'
+Bundle 'xsbeats/vim-blade'
 
 " All the colorschemes.
 Bundle 'sjl/badwolf'
@@ -53,6 +54,7 @@ Bundle 'nanotech/jellybeans.vim'
 Bundle 'tomasr/molokai'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'chriskempson/vim-tomorrow-theme'
+Bundle 'embear/vim-localvimrc'
 
 filetype plugin indent on
 
@@ -251,3 +253,10 @@ let g:EclimCompletionMethod = 'omnifunc'
 " Leader Keybindings
 nnoremap <Leader>n :NERDTreeToggle<CR>:wincmd =<CR>
 nnoremap == <C-w>=
+
+let g:localvimrc_sandbox=0
+let g:localvimrc_whitelist='/home/vverna/code/.*'
+au Filetype blade hi htmlError ctermbg=none
+au Filetype blade hi htmlError ctermfg=196
+
+au Filetype php setlocal ai

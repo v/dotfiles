@@ -14,7 +14,7 @@ ln -fs "${HOME}/dotfiles/X/Xresources"         "${HOME}/.Xresources"
 
 # Link in directories, removing whatever's already there first.
 if [ -e "${HOME}/.vim/bundle" ]; then
-    rm -r "${HOME}/.vim/bundle"
+    rm -rf "${HOME}/.vim/bundle"
 fi
 
 mkdir -p "${HOME}/.vim/bundle"
