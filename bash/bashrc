@@ -75,7 +75,6 @@ DIRS="${HOME}/bin
       /usr/local/Cellar/coreutils/8.19/libexec/gnubin
       /usr/local/Cellar/ruby/1.9.3-p194/bin
       $HOME/arcanist/bin
-      $HOME/.rvm/gems/ruby-1.9.2-p320/bin
       $HOME/.rvm/bin"
 for DIR in $DIRS; do
     if [[ -d "$DIR" ]] && [[ ":${PATH}:" != *":${DIR}:"* ]]; then
@@ -153,8 +152,6 @@ fi
 alias ls="ls ${LS_OPTS}"
 alias grep="grep ${GREP_OPTS}"
 alias vi="vim"
-
-# Protect innocent MySQL databases from my stupidity.
 
 # I always do this, and I hate slow train.
 alias sl='ls'
@@ -261,4 +258,6 @@ alias vac="source ENV/bin/activate"
 # Start with full-fledged prompt.
 prompt on
 
+source $HOME/.rvm/scripts/rvm
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+rvm use ruby

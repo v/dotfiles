@@ -20,3 +20,5 @@
 	editor = /usr/bin/vim
 [log]
     date = local
+[push]
+    default = simple

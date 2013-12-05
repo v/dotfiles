@@ -11,6 +11,7 @@ ln -fs "${HOME}/dotfiles/git/gitignore_global"     "${HOME}/.gitignore_global"
 ln -fs "${HOME}/dotfiles/tmux/tmux.conf"    "${HOME}/.tmux.conf"
 ln -fs "${HOME}/dotfiles/vim/vimrc"         "${HOME}/.vimrc"
 ln -fs "${HOME}/dotfiles/X/Xresources"         "${HOME}/.Xresources"
+ln -fs "${HOME}/dotfiles/teamocil"         "${HOME}/.teamocil"
 
 # Link in directories, removing whatever's already there first.
 if [ -e "${HOME}/.vim/bundle" ]; then
