@@ -5,7 +5,7 @@ windows:
       layout: even-horizontal
       panes:
           - cmd: 'php artisan serve'
-          - cmd: 'grunt w'
+          - cmd: 'grunt watch'
 
     - name: "db"
       clear: true
