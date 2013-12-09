@@ -1,21 +1,23 @@
-windows:
-    - name: "server"
-      clear: true
-      root: "~/code/refactor"
-      layout: even-horizontal
-      panes:
-          - cmd: 'php artisan serve'
-          - cmd: 'grunt watch'
+session:
+    name: 'refactor'
+    windows:
+        - name: "server"
+          clear: true
+          root: "~/code/refactor"
+          layout: even-horizontal
+          panes:
+              - cmd: 'php artisan serve'
+              - cmd: 'grunt watch'
 
-    - name: "db"
-      clear: true
-      root: "~/code/refactor"
-      layout: even-horizontal
-      panes:
-          - cmd: 'echo "Artisan Goes Here"'
-            focus: true
-          - cmd: 'mysql -uflipd db'
-    - name: "app"
-      root: "~/code/refactor"
-      panes:
-          - cmd: 'git status'
+        - name: "db"
+          clear: true
+          root: "~/code/refactor"
+          layout: even-horizontal
+          panes:
+              - cmd: 'echo "Artisan Goes Here"'
+                focus: true
+              - cmd: 'mysql -uflipd db'
+        - name: "app"
+          root: "~/code/refactor"
+          panes:
+              - cmd: 'git status'
