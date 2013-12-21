@@ -266,5 +266,9 @@ au Filetype blade hi htmlError ctermfg=196
 au Filetype php setlocal ai
 inoremap pdb import pdb; pdb.set_trace()
 
+map <C-n> :tabnew<cr>
+map <C-j> gT
+map <C-k> gt
+
 " Clear ctrlp cache
 nnoremap <silent> <leader>t :ClearCtrlPCache<cr>\|:CtrlP<cr>
