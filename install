@@ -21,6 +21,9 @@ fi
 mkdir -p "${HOME}/.vim/bundle"
 git clone git@github.com:gmarik/vundle.git "${HOME}/.vim/bundle/vundle"
 
+mkdir -p "${HOME}/.gconf/apps/gnome-terminal/profiles/Default"
+ln -fs "${HOME}/dotfiles/X/gnome-terminal-conf.xml" "${HOME}/.gconf/apps/gnome-terminal/profiles/Default/%gconf.xml"
+
 vim +BundleInstall +qall
 
 if [ -e "${HOME}/.config/awesome" ]; then
