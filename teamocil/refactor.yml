@@ -6,7 +6,7 @@ session:
           root: "~/code/refactor"
           layout: even-horizontal
           panes:
-              - cmd: 'php artisan serve'
+              - cmd: 'php artisan serve --host 0.0.0.0'
               - cmd: 'grunt watch'
 
         - name: "db"
