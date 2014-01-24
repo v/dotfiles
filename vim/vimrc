@@ -48,8 +48,11 @@ Bundle 'ervandew/supertab'
 Bundle 'xsbeats/vim-blade'
 Bundle 'itspriddle/vim-stripper'
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
+Bundle 'pangloss/vim-javascript'
+Bundle 'briancollins/vim-jst'
 
 " All the colorschemes.
+Bundle 'flazz/vim-colorschemes'
 Bundle 'sjl/badwolf'
 Bundle 'YorickPeterse/Autumn.vim'
 Bundle 'nanotech/jellybeans.vim'
@@ -70,7 +73,7 @@ set background=dark
 
 try
     colorscheme molokai
-    colorscheme badwolf
+    colorscheme skittles-dark
 catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 
@@ -264,6 +267,7 @@ au Filetype blade hi htmlError ctermbg=none
 au Filetype blade hi htmlError ctermfg=196
 
 au Filetype php setlocal ai
+au BufNewFile,BufRead *.html set syntax=jst
 inoremap pdb import pdb; pdb.set_trace()
 
 map <C-n> :tabnew<cr>
