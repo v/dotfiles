@@ -73,7 +73,7 @@ set background=dark
 
 try
     colorscheme molokai
-    colorscheme skittles-dark
+    colorscheme blazer
 catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 
