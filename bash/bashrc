@@ -257,4 +257,4 @@ alias vac="source ENV/bin/activate"
 # Start with full-fledged prompt.
 prompt on
 
-source $HOME/.rvm/scripts/rvm
+[[ -e "$HOME/.rvm/scripts/rvm" ]] && source $HOME/.rvm/scripts/rvm
