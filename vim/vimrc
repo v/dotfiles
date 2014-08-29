@@ -37,6 +37,7 @@ call vundle#rc()
 Bundle 'scrooloose/syntastic'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'bling/vim-airline'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'scrooloose/nerdtree'
 Bundle 'kchmck/vim-coffee-script'
@@ -50,6 +51,7 @@ Bundle 'itspriddle/vim-stripper'
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 Bundle 'pangloss/vim-javascript'
 Bundle 'briancollins/vim-jst'
+Bundle 'mileszs/ack.vim'
 
 " All the colorschemes.
 Bundle 'flazz/vim-colorschemes'
@@ -88,7 +90,7 @@ set smarttab
 
 "Statusline settings"
 set laststatus=2
-let g:Powerline_symbols='fancy'
+"let g:Powerline_symbols='fancy'
 let g:Powerline_cache_enabled=1
 " Formatting
 set formatoptions=croqn1
@@ -276,3 +278,18 @@ map <C-k> gt
 
 " Clear ctrlp cache
 nnoremap <silent> <leader>t :ClearCtrlPCache<cr>\|:CtrlP<cr>
+"let g:NERDTreeDirArrows=0
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+let g:ackprg = 'ag --nogroup --nocolor --column'
