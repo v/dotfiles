@@ -68,12 +68,9 @@ export FIGNORE=$FIGNORE:.pyc:.o:.gitignore
 DIRS="${HOME}/bin
       /usr/local/bin
       /usr/sbin
-      /opt/play
       /sbin
-      /filer/tmp2/contrib/bin
-      $HOME/maple13/bin
-      /usr/local/Cellar/coreutils/8.19/libexec/gnubin
-      $HOME/arcanist/bin
+      /usr/local/Cellar/grep/2.20/bin
+      /usr/local/Cellar/coreutils/8.23/libexec/gnubin
       $HOME/.rvm/bin"
 for DIR in $DIRS; do
     if [[ -d "$DIR" ]] && [[ ":${PATH}:" != *":${DIR}:"* ]]; then
