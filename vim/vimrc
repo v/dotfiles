@@ -36,22 +36,22 @@ call vundle#rc()
 " All the plugins
 Bundle 'scrooloose/syntastic'
 Bundle 'kien/ctrlp.vim'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'bling/vim-airline'
-Bundle 'digitaltoad/vim-jade'
 Bundle 'scrooloose/nerdtree'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'SirVer/ultisnips'
-Bundle 'myusuf3/numbers.vim'
 Bundle 'ervandew/supertab'
+Bundle 'majutsushi/tagbar'
 Bundle 'xsbeats/vim-blade'
 Bundle 'itspriddle/vim-stripper'
-Bundle 'LaTeX-Box-Team/LaTeX-Box'
 Bundle 'pangloss/vim-javascript'
 Bundle 'briancollins/vim-jst'
-Bundle 'mileszs/ack.vim'
+Bundle 'rking/ag.vim'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'mustache/vim-mustache-handlebars'
+Bundle 'vim-scripts/smarty-syntax'
 
 " All the colorschemes.
 Bundle 'flazz/vim-colorschemes'
@@ -62,6 +62,7 @@ Bundle 'tomasr/molokai'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'chriskempson/vim-tomorrow-theme'
 Bundle 'embear/vim-localvimrc'
+Bundle 'junegunn/seoul256.vim'
 
 filetype plugin indent on
 
@@ -75,7 +76,8 @@ set background=dark
 
 try
     colorscheme molokai
-    colorscheme blazer
+    let g:seoul256_background = 233
+    colorscheme seoul256
 catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 
@@ -105,6 +107,10 @@ inoremap jk <Esc>`^
 inoremap JK <Esc>`^
 cnoremap w!! %!sudo tee > /dev/null %
 nnoremap J mzJ`z
+
+" Search for work under cursor wth Ag
+nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap ( /n \<<C-R><C-W>\><CR>
 
 "Reasonable line movement"
 nnoremap j gj
@@ -198,9 +204,17 @@ if has("user_commands")
     command! -bang WA wa<bang>
 endif
 
+if &diff
+    colorscheme jellybeans
+    let g:lite_dfm_normal_bg_cterm=237
+endif
+augroup diffopen
+    autocmd!
+    autocmd FilterWritePre * if &diff | colorscheme jellybeans | endif
+augroup end
+
 " Unmaps
 noremap <F1> <nop>
-nnoremap K <nop>
 nnoremap Q <nop>
 
 " Visual
@@ -244,10 +258,6 @@ if filereadable(glob("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
 
-if exists('+autochdir')
-	set autochdir
-endif
-
 " Compile Latex when I save it.
 au BufWritePost *.tex "silent !pdflatex %"
 
@@ -261,10 +271,12 @@ let g:EclimCompletionMethod = 'omnifunc'
 
 " Leader Keybindings
 nnoremap <Leader>n :NERDTreeToggle<CR>:wincmd =<CR>
+nnoremap <leader>. :CtrlPTag<cr>
+nnoremap <leader>b :Tagbar<cr>
+nnoremap <Leader>f :Ag -i<tab>
+
 nnoremap == <C-w>=
 
-let g:localvimrc_sandbox=0
-let g:localvimrc_whitelist='/home/vverna/code/.*'
 au Filetype blade hi htmlError ctermbg=none
 au Filetype blade hi htmlError ctermfg=196
 
@@ -293,3 +305,4 @@ if executable('ag')
 endif
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
+autocmd QuickFixCmdPost *grep* cwindow
