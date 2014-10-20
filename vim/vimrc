@@ -52,6 +52,7 @@ Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'mustache/vim-mustache-handlebars'
 Bundle 'vim-scripts/smarty-syntax'
+Bundle 'derekwyatt/vim-scala'
 
 " All the colorschemes.
 Bundle 'flazz/vim-colorschemes'
@@ -270,7 +271,7 @@ let g:SuperTabDefaultCompletionType = "context"
 let g:EclimCompletionMethod = 'omnifunc'
 
 " Leader Keybindings
-nnoremap <Leader>n :NERDTreeToggle<CR>:wincmd =<CR>
+nnoremap <Leader>n :NERDTreeToggle %<CR>:wincmd =<CR>
 nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <leader>b :Tagbar<cr>
 nnoremap <Leader>f :Ag -i<tab>
