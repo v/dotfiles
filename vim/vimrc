@@ -291,7 +291,6 @@ map <C-k> gt
 
 " Clear ctrlp cache
 nnoremap <silent> <leader>t :ClearCtrlPCache<cr>\|:CtrlP<cr>
-"let g:NERDTreeDirArrows=0
 
 " The Silver Searcher
 if executable('ag')
