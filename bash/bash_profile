@@ -1,5 +1,8 @@
 if [ -f /etc/profile ]; then
-    PATH=""
+    # Mac OS adds additional things to the PATH.
+    if [ "$(uname)" == "Darwin" ]; then
+        PATH=""
+    fi
     source /etc/profile
 fi
 source $HOME/.bashrc
