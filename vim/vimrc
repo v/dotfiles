@@ -53,6 +53,7 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'mustache/vim-mustache-handlebars'
 Bundle 'vim-scripts/smarty-syntax'
 Bundle 'derekwyatt/vim-scala'
+Bundle 'ConradIrwin/vim-bracketed-paste'
 
 " All the colorschemes.
 Bundle 'flazz/vim-colorschemes'
