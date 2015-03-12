@@ -315,3 +315,5 @@ let g:hound_base_url = "hound.etsycorp.com"
 let g:hound_port = "6080"
 let g:hound_repos = "EtsyWeb"
 nnoremap <C-h> :Hound<space><C-R><C-W>
+let g:hound_results_style = "vsplit"
+let g:ctrlp_lazy_update = 250
