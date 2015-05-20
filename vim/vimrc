@@ -311,9 +311,10 @@ autocmd QuickFixCmdPost *grep* cwindow
 " Hound
 let g:hound_base_url = "hound.etsycorp.com"
 let g:hound_port = "6080"
-let g:hound_repos = "EtsyWeb"
+let g:hound_repos = "EtsyWeb,BigData,Nagios,AndroidApp"
 nnoremap <C-h> :Hound<space><C-R><C-W>
 let g:hound_results_style = "vsplit"
+nnoremap <Bar> :vertical wincmd f<CR>
 
 " Ctrlp Settings from Annika Backstrom
 let g:ctrlp_lazy_update = 100
