@@ -235,6 +235,7 @@ function prompt {
 
 function imgshare {
     scp $1 imgshare.etsycorp.com:/var/www/imgshare/vverma/
+    echo "http://imgshare.etsycorp.com/vverma/$1" | pbcopy
 }
 
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
