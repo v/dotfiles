@@ -233,6 +233,10 @@ function prompt {
     esac
 }
 
+function imgshare {
+    scp $1 imgshare.etsycorp.com:/var/www/imgshare/vverma/
+}
+
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 #some machines dont keep my sudo.
