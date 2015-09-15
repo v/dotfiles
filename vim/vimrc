@@ -33,6 +33,12 @@ filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
+" Fix smarty commenting in Nerd Commenter
+
+:let g:NERDCustomDelimiters = {
+\ 'smarty': { 'left': '{%*', 'right': '*%}' }
+\ }
+
 " All the plugins
 Bundle 'scrooloose/syntastic'
 Bundle 'kien/ctrlp.vim'
