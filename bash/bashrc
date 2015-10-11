@@ -70,8 +70,8 @@ DIRS="${HOME}/bin
       /usr/sbin
       /sbin
       /usr/local/Cellar/grep/2.20/bin
-      /usr/local/Cellar/coreutils/8.23/libexec/gnubin
-      $HOME/.rvm/bin"
+      ./node_modules/.bin
+      /usr/local/Cellar/coreutils/8.23/libexec/gnubin"
 for DIR in $DIRS; do
     if [[ -d "$DIR" ]] && [[ ":${PATH}:" != *":${DIR}:"* ]]; then
         if [[ -n "$PATH" ]]; then
@@ -261,5 +261,4 @@ alias giff='echo "ffmpeg -i in.mov -s 600x400 -pix_fmt rgb24 -r 10 -f gif - | gi
 
 # Start with full-fledged prompt.
 prompt on
-
-[[ -e "$HOME/.rvm/scripts/rvm" ]] && source $HOME/.rvm/scripts/rvm
+eval "$(rbenv init -)"
