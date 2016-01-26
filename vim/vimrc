@@ -319,7 +319,7 @@ let g:hound_base_url = "hound.etsycorp.com"
 let g:hound_port = "6080"
 let g:hound_repos = "EtsyWeb,BigData,Nagios,AndroidApp"
 nnoremap <C-h> :Hound<space><C-R><C-W>
-let g:hound_results_style = "vsplit"
+let g:hound_vertical_split = 1
 nnoremap <Bar> :vertical wincmd f<CR>
 
 let hostname = substitute(system('hostname'), '\n', '', '')
