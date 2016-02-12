@@ -261,4 +261,3 @@ alias giff='echo "ffmpeg -i in.mov -s 600x400 -pix_fmt rgb24 -r 10 -f gif - | gi
 
 # Start with full-fledged prompt.
 prompt on
-eval "$(rbenv init -)"
