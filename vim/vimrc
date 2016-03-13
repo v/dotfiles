@@ -63,6 +63,8 @@ Bundle 'ConradIrwin/vim-bracketed-paste'
 Bundle 'mattn/webapi-vim'
 Bundle 'urthbound/hound.vim'
 Bundle 'FelikZ/ctrlp-py-matcher'
+Bundle 'yssl/QFEnter'
+Bundle 'tpope/vim-unimpaired'
 
 " All the colorschemes.
 Bundle 'flazz/vim-colorschemes'
@@ -302,6 +304,14 @@ map <C-k> gt
 " Clear ctrlp cache
 nnoremap <silent> <leader>t :ClearCtrlPCache<cr>\|:CtrlP<cr>
 
+" open file under cursor in vertical split / tab
+nnoremap <Bar> :vertical wincmd f<CR>
+nnoremap _ :tab wincmd f<CR>
+
+" splits from quickfix
+let g:qfenter_vopen_map = ['<Bar>']
+let g:qfenter_topen_map = ['_']
+
 " The Silver Searcher
 if executable('ag')
   " Use ag over grep
@@ -320,8 +330,6 @@ let g:hound_port = "6080"
 let g:hound_repos = "EtsyWeb,BigData,Nagios,AndroidApp"
 nnoremap <C-h> :Hound<space><C-R><C-W>
 let g:hound_vertical_split = 1
-nnoremap <Bar> :vertical wincmd f<CR>
-nnoremap _ :tab wincmd f<CR>
 
 let hostname = substitute(system('hostname'), '\n', '', '')
 
