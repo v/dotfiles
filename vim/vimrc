@@ -324,13 +324,6 @@ endif
 let g:ackprg = 'ag --nogroup --nocolor --column'
 autocmd QuickFixCmdPost *grep* cwindow
 
-" Hound
-let g:hound_base_url = "hound.etsycorp.com"
-let g:hound_port = "6080"
-let g:hound_repos = "EtsyWeb,BigData,Nagios,AndroidApp"
-nnoremap <C-h> :Hound<space><C-R><C-W>
-let g:hound_vertical_split = 1
-
 let hostname = substitute(system('hostname'), '\n', '', '')
 
 if hostname == "whitewalker"
