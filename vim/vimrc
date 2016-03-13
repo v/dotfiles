@@ -321,6 +321,7 @@ let g:hound_repos = "EtsyWeb,BigData,Nagios,AndroidApp"
 nnoremap <C-h> :Hound<space><C-R><C-W>
 let g:hound_vertical_split = 1
 nnoremap <Bar> :vertical wincmd f<CR>
+nnoremap _ :tab wincmd f<CR>
 
 let hostname = substitute(system('hostname'), '\n', '', '')
 
