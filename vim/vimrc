@@ -61,7 +61,7 @@ Bundle 'vim-scripts/smarty-syntax'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'ConradIrwin/vim-bracketed-paste'
 Bundle 'mattn/webapi-vim'
-Bundle 'urthbound/hound.vim'
+Bundle 'v/hound.vim'
 Bundle 'FelikZ/ctrlp-py-matcher'
 Bundle 'yssl/QFEnter'
 Bundle 'tpope/vim-unimpaired'
@@ -311,6 +311,10 @@ nnoremap _ :tab wincmd f<CR>
 " splits from quickfix
 let g:qfenter_vopen_map = ['<Bar>']
 let g:qfenter_topen_map = ['_']
+
+" open/close quickfix easily
+nnoremap qq :ccl<cr>
+nnoremap qo :copen<cr>
 
 " The Silver Searcher
 if executable('ag')
