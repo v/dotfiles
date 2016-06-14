@@ -65,6 +65,7 @@ Bundle 'urthbound/hound.vim'
 Bundle 'FelikZ/ctrlp-py-matcher'
 Bundle 'yssl/QFEnter'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'lambdatoast/elm.vim'
 
 " All the colorschemes.
 Bundle 'flazz/vim-colorschemes'

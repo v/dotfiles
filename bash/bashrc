@@ -249,8 +249,11 @@ alias json="python -mjson.tool"
 alias racket="racket -il xrepl"
 alias vac="source ENV/bin/activate"
 
-# all I need is a reminder
-alias giff='echo "ffmpeg -i in.mov -s 600x400 -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > out.gif"'
+do_giff() {
+    ffmpeg -i "$1" -s 600x400 -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$1.gif";
+}
+
+alias giff=do_giff
 
 # Run local file if it exists.
 [[ -e "${HOME}/.bashrc.local" ]] && source "${HOME}/.bashrc.local"
