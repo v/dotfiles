@@ -40,7 +40,6 @@ call plug#begin('~/.vim/plugged')
 
 " All the plugins
 Plug 'scrooloose/syntastic'
-Plug 'kien/ctrlp.vim'
 Plug 'bling/vim-airline'
 Plug 'scrooloose/nerdtree'
 Plug 'kchmck/vim-coffee-script'
@@ -61,9 +60,9 @@ Plug 'derekwyatt/vim-scala'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'mattn/webapi-vim'
 Plug 'urthbound/hound.vim'
-Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'yssl/QFEnter'
 Plug 'tpope/vim-unimpaired'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'lambdatoast/elm.vim'
 
@@ -286,7 +285,6 @@ let g:EclimCompletionMethod = 'omnifunc'
 
 " Leader Keybindings
 nnoremap <Leader>n :NERDTreeToggle %<CR>:wincmd =<CR>
-nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <leader>b :Tagbar<cr>
 nnoremap <Leader>f :Ag -i<tab>
 
@@ -302,9 +300,6 @@ inoremap pdb import pdb; pdb.set_trace()
 map <C-n> :tabnew<cr>
 map <C-j> gT
 map <C-k> gt
-
-" Clear ctrlp cache
-nnoremap <silent> <leader>t :ClearCtrlPCache<cr>\|:CtrlP<cr>
 
 " open file under cursor in vertical split / tab
 nnoremap <Bar> :vertical wincmd f<CR>
@@ -322,25 +317,10 @@ nnoremap qo :copen<cr>
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
 autocmd QuickFixCmdPost *grep* cwindow
 
 let hostname = substitute(system('hostname'), '\n', '', '')
-
-if hostname == "whitewalker"
-    let g:ctrlp_use_caching = 0
-else
-    " etsy settings
-
-    " Ctrlp Settings from Annika Backstrom
-    let g:ctrlp_lazy_update = 100
-    let g:ctrlp_clear_cache_on_exit = 0
-    let g:ctrlp_max_files = 0
-    let g:ctrlp_max_height = 30
-    let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-endif
+nnoremap <C-p> :Files<cr>
