@@ -30,8 +30,7 @@ filetype off
 
 " }}}
 
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+call plug#begin('~/.vim/plugged')
 
 " Fix smarty commenting in Nerd Commenter
 
@@ -40,45 +39,47 @@ call vundle#rc()
 \ }
 
 " All the plugins
-Bundle 'scrooloose/syntastic'
-Bundle 'kien/ctrlp.vim'
-Bundle 'bling/vim-airline'
-Bundle 'scrooloose/nerdtree'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'ervandew/supertab'
-Bundle 'majutsushi/tagbar'
-Bundle 'xsbeats/vim-blade'
-Bundle 'itspriddle/vim-stripper'
-Bundle 'pangloss/vim-javascript'
-Bundle 'briancollins/vim-jst'
-Bundle 'rking/ag.vim'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'mustache/vim-mustache-handlebars'
-Bundle 'vim-scripts/smarty-syntax'
-Bundle 'derekwyatt/vim-scala'
-Bundle 'ConradIrwin/vim-bracketed-paste'
-Bundle 'mattn/webapi-vim'
-Bundle 'urthbound/hound.vim'
-Bundle 'FelikZ/ctrlp-py-matcher'
-Bundle 'yssl/QFEnter'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'lambdatoast/elm.vim'
+Plug 'scrooloose/syntastic'
+Plug 'kien/ctrlp.vim'
+Plug 'bling/vim-airline'
+Plug 'scrooloose/nerdtree'
+Plug 'kchmck/vim-coffee-script'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdcommenter'
+Plug 'ervandew/supertab'
+Plug 'majutsushi/tagbar'
+Plug 'xsbeats/vim-blade'
+Plug 'itspriddle/vim-stripper'
+Plug 'pangloss/vim-javascript'
+Plug 'briancollins/vim-jst'
+Plug 'rking/ag.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'airblade/vim-gitgutter'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'vim-scripts/smarty-syntax'
+Plug 'derekwyatt/vim-scala'
+Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'mattn/webapi-vim'
+Plug 'urthbound/hound.vim'
+Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'yssl/QFEnter'
+Plug 'tpope/vim-unimpaired'
+Plug 'junegunn/fzf.vim'
+Plug 'lambdatoast/elm.vim'
 
 " All the colorschemes.
-Bundle 'flazz/vim-colorschemes'
-Bundle 'sjl/badwolf'
-Bundle 'YorickPeterse/Autumn.vim'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'tomasr/molokai'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'chriskempson/vim-tomorrow-theme'
-Bundle 'embear/vim-localvimrc'
-Bundle 'junegunn/seoul256.vim'
+Plug 'flazz/vim-colorschemes'
+Plug 'sjl/badwolf'
+Plug 'YorickPeterse/Autumn.vim'
+Plug 'nanotech/jellybeans.vim'
+Plug 'tomasr/molokai'
+Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'embear/vim-localvimrc'
+Plug 'junegunn/seoul256.vim'
 
 filetype plugin indent on
+call plug#end()
 
 let mapleader=","
 
