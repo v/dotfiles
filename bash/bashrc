@@ -264,3 +264,5 @@ alias giff=do_giff
 
 # Start with full-fledged prompt.
 prompt on
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
