@@ -65,6 +65,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'lambdatoast/elm.vim'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags'
 
 " All the colorschemes.
 Plug 'flazz/vim-colorschemes'
@@ -221,6 +223,7 @@ endif
 if &diff
     colorscheme jellybeans
     let g:lite_dfm_normal_bg_cterm=237
+    nnoremap qq :qa<cr>
 endif
 augroup diffopen
     autocmd!
@@ -310,8 +313,10 @@ let g:qfenter_vopen_map = ['<Bar>']
 let g:qfenter_topen_map = ['_']
 
 " open/close quickfix easily
-nnoremap qq :ccl<cr>
-nnoremap qo :copen<cr>
+if !&diff
+    nnoremap qo :copen<cr>
+    nnoremap qq :ccl<cr>
+endif
 
 " The Silver Searcher
 if executable('ag')
@@ -324,3 +329,6 @@ autocmd QuickFixCmdPost *grep* cwindow
 
 let hostname = substitute(system('hostname'), '\n', '', '')
 nnoremap <C-p> :Files<cr>
+nnoremap <leader>t :Tags<CR>
+nnoremap <leader>m :History<CR>
+nnoremap <leader>b :Buffers<CR>

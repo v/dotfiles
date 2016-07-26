@@ -266,3 +266,4 @@ alias giff=do_giff
 prompt on
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_COMMAND='ag -g ""'
