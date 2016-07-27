@@ -286,10 +286,19 @@ let g:Powerline_symbols = 'unicode'
 let g:SuperTabDefaultCompletionType = "context"
 let g:EclimCompletionMethod = 'omnifunc'
 
+" always open nerd tree in current directory
+function! ToggleNerdTree()
+    if g:NERDTree.IsOpen()
+        NERDTreeToggle
+    else
+        NERDTreeFind
+    endif
+endfunction
+
 " Leader Keybindings
-nnoremap <Leader>n :NERDTreeToggle %<CR>:wincmd =<CR>
+nnoremap <Leader>n :call ToggleNerdTree()<CR>
 nnoremap <leader>b :Tagbar<cr>
-nnoremap <Leader>f :Ag -i<tab>
+
 
 nnoremap == <C-w>=
 
