@@ -290,8 +290,10 @@ let g:EclimCompletionMethod = 'omnifunc'
 function! ToggleNerdTree()
     if g:NERDTree.IsOpen()
         NERDTreeToggle
-    else
+    elseif @%
         NERDTree %
+    else
+        NERDTree
     endif
 endfunction
 
