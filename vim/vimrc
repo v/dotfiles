@@ -97,6 +97,11 @@ try
 catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
 
 "Indentation settings
 set tabstop=4
@@ -105,6 +110,7 @@ set shiftwidth=4
 set expandtab
 set autoindent
 set smarttab
+set hidden
 
 "Statusline settings"
 set laststatus=2
@@ -311,9 +317,9 @@ au Filetype php setlocal ai
 au BufNewFile,BufRead *.html set syntax=jst
 inoremap pdb import pdb; pdb.set_trace()
 
-map <C-n> :tabnew<cr>
-map <C-j> gT
-map <C-k> gt
+map <C-n> :enew<CR>
+map <C-j> :bnext<CR>
+map <C-k> :bprevious<CR>
 
 " open file under cursor in vertical split / tab
 nnoremap <Bar> :vertical wincmd f<CR>
