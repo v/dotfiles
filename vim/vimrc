@@ -51,7 +51,6 @@ Plug 'xsbeats/vim-blade'
 Plug 'itspriddle/vim-stripper'
 Plug 'pangloss/vim-javascript'
 Plug 'briancollins/vim-jst'
-Plug 'rking/ag.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'airblade/vim-gitgutter'
 Plug 'mustache/vim-mustache-handlebars'
@@ -64,6 +63,7 @@ Plug 'yssl/QFEnter'
 Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'rking/ag.vim'
 Plug 'lambdatoast/elm.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
@@ -318,8 +318,8 @@ au BufNewFile,BufRead *.html set syntax=jst
 inoremap pdb import pdb; pdb.set_trace()
 
 map <C-n> :enew<CR>
-map <C-j> :bnext<CR>
-map <C-k> :bprevious<CR>
+map <C-j> :bprevious<CR>
+map <C-k> :bnext<CR>
 
 " open file under cursor in vertical split / tab
 nnoremap <Bar> :vertical wincmd f<CR>
