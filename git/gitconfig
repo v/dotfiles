@@ -23,3 +23,5 @@
     date = local
 [push]
     default = simple
+[rebase]
+	autoStash = true
