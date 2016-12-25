@@ -19,7 +19,7 @@
 [core]
 	filemode = false
     excludesfile = ~/.gitignore_global
-	editor = /usr/bin/vim
+	editor = /usr/bin/env vim
 [log]
     date = local
 [push]
