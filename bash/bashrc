@@ -248,6 +248,7 @@ alias json="python -mjson.tool"
 
 alias racket="racket -il xrepl"
 alias vac="source ENV/bin/activate"
+alias ew="cd $TMUX_ROOT_DIR"
 
 do_giff() {
     ffmpeg -i "$1" -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=6 > "$1.gif";
