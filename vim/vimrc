@@ -68,6 +68,9 @@ Plug 'rking/ag.vim'
 Plug 'lambdatoast/elm.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
+Plug 'Shougo/vimproc.vim'
+Plug 'Quramy/tsuquyomi'
+Plug 'leafgarland/typescript-vim'
 
 " All the colorschemes.
 Plug 'flazz/vim-colorschemes'
