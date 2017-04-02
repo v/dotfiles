@@ -24,6 +24,9 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 mkdir -p "${HOME}/.gconf/apps/gnome-terminal/profiles/Default"
 ln -fs "${HOME}/dotfiles/X/gnome-terminal-conf.xml" "${HOME}/.gconf/apps/gnome-terminal/profiles/Default/%gconf.xml"
 
+mkdir -p "${HOME}/.vim/UltiSnips"
+ln -fs "${HOME}/dotfiles/vim/typescript.snippets" "${HOME}/.vim/UltiSnips/typescript.snippets"
+
 vim +PlugInstall +qall
 
 if [ -e "${HOME}/.config/awesome" ]; then
