@@ -50,9 +50,6 @@ shopt -s globstar &>/dev/null
 # Append rather than overwrite Bash history.
 shopt -s histappend &>/dev/null
 
-# Never beep at me.
-hash setterm &>/dev/null && setterm -bfreq 0
-
 # Turn off annoying and useless flow control keys.
 hash stty &>/dev/null && stty -ixon
 
