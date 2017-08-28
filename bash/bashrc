@@ -68,7 +68,7 @@ DIRS="${HOME}/bin
       /sbin
       /usr/local/Cellar/grep/2.20/bin
       ./node_modules/.bin
-      /usr/local/Cellar/coreutils/8.23/libexec/gnubin"
+      /usr/local/opt/coreutils/libexec/gnubin"
 for DIR in $DIRS; do
     if [[ -d "$DIR" ]] && [[ ":${PATH}:" != *":${DIR}:"* ]]; then
         if [[ -n "$PATH" ]]; then
