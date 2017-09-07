@@ -58,8 +58,8 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'vim-scripts/smarty-syntax'
 Plug 'derekwyatt/vim-scala'
 Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'fatih/vim-go'
 Plug 'mattn/webapi-vim'
-Plug 'urthbound/hound.vim'
 Plug 'yssl/QFEnter'
 Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -69,6 +69,7 @@ Plug 'lambdatoast/elm.vim'
 Plug 'Shougo/vimproc.vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
+Plug 'sgur/vim-editorconfig'
 
 " All the colorschemes.
 Plug 'flazz/vim-colorschemes'
@@ -337,7 +338,27 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 autocmd QuickFixCmdPost *grep* cwindow
 
 let hostname = substitute(system('hostname'), '\n', '', '')
-nnoremap <C-p> :Files<cr>
+nnoremap <C-p> :FZF<cr>
 nnoremap <leader>t :Tags<CR>
 nnoremap <leader>m :History<CR>
 nnoremap <leader>b :Buffers<CR>
+
+" Go specific settings
+
+let g:go_fmt_command = "goimports"
+let g:go_metalinter_autosave = 1
+
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+autocmd FileType go nmap <leader>gb :<C-u>call <SID>build_go_files()<CR>
+autocmd FileType go nmap <leader>gr :GoRun<CR>
+autocmd FileType go nmap <leader>gd :GoDoc<CR>
+autocmd FileType go nmap <Leader>gi <Plug>(go-info)
