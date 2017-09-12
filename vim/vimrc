@@ -44,6 +44,7 @@ Plug 'bling/vim-airline'
 Plug 'scrooloose/nerdtree'
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'scrooloose/nerdcommenter'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
@@ -360,5 +361,5 @@ endfunction
 
 autocmd FileType go nmap <leader>gb :<C-u>call <SID>build_go_files()<CR>
 autocmd FileType go nmap <leader>gr :GoRun<CR>
-autocmd FileType go nmap <leader>gd :GoDoc<CR>
+autocmd FileType go nmap \|  <Plug>(go-def-vertical)
 autocmd FileType go nmap <Leader>gi <Plug>(go-info)
