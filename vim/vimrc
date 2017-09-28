@@ -71,6 +71,10 @@ Plug 'Shougo/vimproc.vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
 Plug 'sgur/vim-editorconfig'
+Plug 'taketwo/vim-ros'
+Plug 'rhysd/vim-clang-format'
+Plug 'ternjs/tern_for_vim'
+Plug 'flowtype/vim-flow'
 
 " All the colorschemes.
 Plug 'flazz/vim-colorschemes'
@@ -250,7 +254,6 @@ if has("wildmenu")
     if has("wildignore")
         set wildignore+=*.a,*.o
         set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
-        set wildignore+=.DS_Store,.git,.hg,.svn
         set wildignore+=*~,*.swp,*.tmp
         set wildignore+=*.pyc
         set wildignore+=*.class
@@ -313,7 +316,7 @@ au Filetype blade hi htmlError ctermfg=196
 
 au Filetype php setlocal ai
 au BufNewFile,BufRead *.html set syntax=jst
-inoremap pdb import pdb; pdb.set_trace()
+au Filetype python inoremap pdb import pdb; pdb.set_trace()
 
 " open file under cursor in vertical split / tab
 nnoremap <Bar> :vertical wincmd f<CR>
@@ -359,7 +362,32 @@ function! s:build_go_files()
   endif
 endfunction
 
+" Gets the URL to a file on github
+function! Github()
+python << EOF
+
+import vim
+import os, sys, re
+
+def get_cmd_output(cmd):
+    return subprocess.check_output(cmd).rstrip().decode('utf-8')
+
+file_name = vim.current.buffer.name
+path = os.path.realpath(file_name)
+
+git_branch = get_cmd_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD'])
+blob_path = get_cmd_output(['git', 'ls-tree', '--full-name', '--name-only', 'HEAD', path])
+current_line = vim.current.range.start + 1
+
+github_repo_url = get_cmd_output(['hub', 'browse', '-u', '--', 'blob/%s/%s#L%d' % (git_branch, blob_path, current_line)])
+print github_repo_url
+EOF
+endfunction
+
+nnoremap gh :call Github()<cr>
+
 autocmd FileType go nmap <leader>gb :<C-u>call <SID>build_go_files()<CR>
 autocmd FileType go nmap <leader>gr :GoRun<CR>
 autocmd FileType go nmap \|  <Plug>(go-def-vertical)
 autocmd FileType go nmap <Leader>gi <Plug>(go-info)
+autocmd FileType c,cpp ClangFormatAutoEnable
