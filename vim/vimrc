@@ -367,6 +367,7 @@ function! Github()
 python << EOF
 
 import vim
+import subprocess
 import os, sys, re
 
 def get_cmd_output(cmd):
