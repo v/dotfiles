@@ -71,7 +71,6 @@ Plug 'Shougo/vimproc.vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
 Plug 'sgur/vim-editorconfig'
-Plug 'taketwo/vim-ros'
 Plug 'rhysd/vim-clang-format'
 Plug 'ternjs/tern_for_vim'
 Plug 'flowtype/vim-flow'
@@ -350,6 +349,7 @@ nnoremap <leader>b :Buffers<CR>
 " Go specific settings
 
 let g:go_fmt_command = "goimports"
+let g:syntastic_go_checkers = ['gometalinter']
 let g:go_metalinter_autosave = 1
 
 " run :GoBuild or :GoTestCompile based on the go file
@@ -360,11 +360,17 @@ function! s:build_go_files()
   elseif l:file =~# '^\f\+\.go$'
     call go#cmd#Build(0)
   endif
-endfunction
+endf
+
+if has('python')
+  command! -nargs=* Py python <args>
+elseif has('python3')
+  command! -nargs=* Py python3 <args>
+endif
 
 " Gets the URL to a file on github
 function! Github()
-python << EOF
+Py << EOF
 
 import vim
 import subprocess
@@ -381,7 +387,7 @@ blob_path = get_cmd_output(['git', 'ls-tree', '--full-name', '--name-only', 'HEA
 current_line = vim.current.range.start + 1
 
 github_repo_url = get_cmd_output(['hub', 'browse', '-u', '--', 'blob/%s/%s#L%d' % (git_branch, blob_path, current_line)])
-print github_repo_url
+print(github_repo_url)
 EOF
 endfunction
 
