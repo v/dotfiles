@@ -272,3 +272,4 @@ prompt on
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_COMMAND='ag -g ""'
+export GIT_COMPLETION_CHECKOUT_NO_GUESS=1
