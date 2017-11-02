@@ -383,10 +383,14 @@ file_name = vim.current.buffer.name
 path = os.path.realpath(file_name)
 
 git_branch = get_cmd_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD'])
-blob_path = get_cmd_output(['git', 'ls-tree', '--full-name', '--name-only', 'HEAD', path])
+if '/' in git_branch:
+    blob_path = get_cmd_output(['git', 'rev-parse', 'HEAD'])
+else:
+    blob_path = git_branch
+file_path = get_cmd_output(['git', 'ls-tree', '--full-name', '--name-only', 'HEAD', path])
 current_line = vim.current.range.start + 1
 
-github_repo_url = get_cmd_output(['hub', 'browse', '-u', '--', 'blob/%s/%s#L%d' % (git_branch, blob_path, current_line)])
+github_repo_url = get_cmd_output(['hub', 'browse', '-u', '--', 'blob/%s/%s#L%d' % (blob_path, file_path, current_line)])
 print(github_repo_url)
 EOF
 endfunction
