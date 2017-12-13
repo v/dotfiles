@@ -153,8 +153,7 @@ alias vi="vim"
 # I always do this, and I hate slow train.
 alias sl='ls'
 
-# I actually use ed now and then. Go figure.
-alias ed='ed -p:'
+alias ta='tmux a -t'
 
 # Decide on color for prompt.
 if [[ $EUID -eq 0 ]]; then
