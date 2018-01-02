@@ -47,7 +47,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'scrooloose/nerdcommenter'
 Plug 'SirVer/ultisnips'
-Plug 'ervandew/supertab'
 Plug 'majutsushi/tagbar'
 Plug 'xsbeats/vim-blade'
 Plug 'itspriddle/vim-stripper'
@@ -68,7 +67,14 @@ Plug 'junegunn/fzf.vim'
 Plug 'rking/ag.vim'
 Plug 'lambdatoast/elm.vim'
 Plug 'Shougo/vimproc.vim'
-Plug 'Quramy/tsuquyomi'
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+if !&diff
+    Plug 'Quramy/tsuquyomi'
+endif
 Plug 'leafgarland/typescript-vim'
 Plug 'sgur/vim-editorconfig'
 Plug 'rhysd/vim-clang-format'
@@ -85,6 +91,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'embear/vim-localvimrc'
 Plug 'junegunn/seoul256.vim'
+Plug 'Chiel92/vim-autoformat'
 
 filetype plugin indent on
 call plug#end()
@@ -289,8 +296,7 @@ map q: <cr>
 set completeopt=menuone,longest,preview
 
 let g:Powerline_symbols = 'unicode'
-let g:SuperTabDefaultCompletionType = "context"
-let g:EclimCompletionMethod = 'omnifunc'
+let g:deoplete#enable_at_startup = 1
 
 " always open nerd tree in current directory
 function! ToggleNerdTree()
@@ -345,6 +351,7 @@ nnoremap <C-p> :FZF<cr>
 nnoremap <leader>t :Tags<CR>
 nnoremap <leader>m :History<CR>
 nnoremap <leader>b :Buffers<CR>
+noremap <leader>f :Autoformat<CR>
 
 " Go specific settings
 
