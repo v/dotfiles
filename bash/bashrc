@@ -154,6 +154,7 @@ alias vi="vim"
 alias sl='ls'
 
 alias ta='tmux a -t'
+alias tn='tmux new -s'
 
 # Decide on color for prompt.
 if [[ $EUID -eq 0 ]]; then
@@ -250,7 +251,7 @@ alias racket="racket -il xrepl"
 alias vac="source ENV/bin/activate"
 
 if [[ -n "$TMUX" ]]; then
-    alias ew="cd ~/code/$(tmux display-message -p '#S')"
+    alias ew="cd -P ~/code/$(tmux display-message -p '#S')"
 fi
 
 do_giff() {
