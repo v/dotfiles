@@ -149,6 +149,7 @@ fi
 alias ls="ls ${LS_OPTS}"
 alias grep="grep ${GREP_OPTS}"
 alias vi="vim"
+alias view="vim -R"
 
 # I always do this, and I hate slow train.
 alias sl='ls'
@@ -271,5 +272,4 @@ alias giff=do_giff
 prompt on
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export FZF_DEFAULT_COMMAND='ag -g ""'
 export GIT_COMPLETION_CHECKOUT_NO_GUESS=1

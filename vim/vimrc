@@ -293,7 +293,7 @@ au BufWritePost *.tex "silent !pdflatex %"
 
 map q: <cr>
 
-set completeopt=menuone,longest,preview
+set completeopt=menuone,longest
 
 let g:Powerline_symbols = 'unicode'
 let g:deoplete#enable_at_startup = 1
@@ -348,7 +348,7 @@ autocmd QuickFixCmdPost *grep* cwindow
 
 let hostname = substitute(system('hostname'), '\n', '', '')
 nnoremap <C-p> :FZF<cr>
-nnoremap <leader>t :Tags<CR>
+nnoremap <leader>t :GoTestFunc<CR>
 nnoremap <leader>m :History<CR>
 nnoremap <leader>b :Buffers<CR>
 noremap <leader>f :Autoformat<CR>
@@ -356,17 +356,12 @@ noremap <leader>f :Autoformat<CR>
 " Go specific settings
 
 let g:go_fmt_command = "goimports"
-let g:syntastic_go_checkers = ['gofmt']
+let g:syntastic_go_checkers = ['gometalinter']
 let g:go_metalinter_autosave = 0
 
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
-  let l:file = expand('%')
-  if l:file =~# '^\f\+_test\.go$'
-    call go#test#Test(0, 1)
-  elseif l:file =~# '^\f\+\.go$'
-    call go#cmd#Build(0)
-  endif
+  call go#cmd#Build(0)
 endf
 
 if has('python')
