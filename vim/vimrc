@@ -39,7 +39,6 @@ call plug#begin('~/.vim/plugged')
 \ }
 
 " All the plugins
-Plug 'scrooloose/syntastic'
 Plug 'bling/vim-airline'
 Plug 'scrooloose/nerdtree'
 Plug 'kchmck/vim-coffee-script'
@@ -70,7 +69,8 @@ Plug 'Shougo/vimproc.vim'
 Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 if !&diff
     Plug 'Quramy/tsuquyomi'
@@ -80,6 +80,8 @@ Plug 'sgur/vim-editorconfig'
 Plug 'rhysd/vim-clang-format'
 Plug 'ternjs/tern_for_vim'
 Plug 'flowtype/vim-flow'
+Plug 'isRuslan/vim-es6'
+Plug 'hashivim/vim-terraform'
 
 " All the colorschemes.
 Plug 'flazz/vim-colorschemes'
@@ -92,6 +94,8 @@ Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'embear/vim-localvimrc'
 Plug 'junegunn/seoul256.vim'
 Plug 'Chiel92/vim-autoformat'
+Plug 'w0rp/ale'
+
 
 filetype plugin indent on
 call plug#end()
@@ -356,7 +360,6 @@ noremap <leader>f :Autoformat<CR>
 " Go specific settings
 
 let g:go_fmt_command = "goimports"
-let g:syntastic_go_checkers = ['gometalinter']
 let g:go_metalinter_autosave = 0
 
 " run :GoBuild or :GoTestCompile based on the go file
@@ -396,6 +399,11 @@ github_repo_url = get_cmd_output(['hub', 'browse', '-u', '--', 'blob/%s/%s#L%d' 
 print(github_repo_url)
 EOF
 endfunction
+
+let g:ale_linters = {'go': ['gometalinter', 'goimports']}
+let g:ale_go_gometalinter_options = '--fast'
+let g:terraform_align=1
+let g:flow#autoclose=1
 
 nnoremap gh :call Github()<cr>
 
