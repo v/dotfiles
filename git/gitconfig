@@ -15,6 +15,7 @@
     l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     p = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellowllow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -p
     pr = pull-request
+    pt = push-to-target
     pullr = pull --rebase
 
 [core]

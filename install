@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eu
+
 cd "${HOME}"
 
 # Link in files, replacing whatever's already there.
@@ -26,6 +28,9 @@ ln -fs "${HOME}/dotfiles/X/gnome-terminal-conf.xml" "${HOME}/.gconf/apps/gnome-t
 
 mkdir -p "${HOME}/.vim/UltiSnips"
 ln -fs "${HOME}/dotfiles/vim/gitrebase.snippets" "${HOME}/.vim/UltiSnips/gitrebase.snippets"
+
+mkdir -p "${HOME}/bin"
+ln -fs ${HOME}/dotfiles/bin/git-push-to-target ${HOME}/bin/git-push-to-target
 
 vim +PlugInstall +qall
 
