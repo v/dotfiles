@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -eu
+
+hub pr -b master -h $(git pt --query) -f

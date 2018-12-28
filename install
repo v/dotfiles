@@ -31,6 +31,7 @@ ln -fs "${HOME}/dotfiles/vim/gitrebase.snippets" "${HOME}/.vim/UltiSnips/gitreba
 
 mkdir -p "${HOME}/bin"
 ln -fs ${HOME}/dotfiles/bin/git-push-to-target ${HOME}/bin/git-push-to-target
+ln -fs ${HOME}/dotfiles/bin/git-pr-target ${HOME}/bin/git-pr-target
 
 vim +PlugInstall +qall
 
