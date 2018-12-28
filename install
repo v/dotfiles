@@ -25,7 +25,7 @@ mkdir -p "${HOME}/.gconf/apps/gnome-terminal/profiles/Default"
 ln -fs "${HOME}/dotfiles/X/gnome-terminal-conf.xml" "${HOME}/.gconf/apps/gnome-terminal/profiles/Default/%gconf.xml"
 
 mkdir -p "${HOME}/.vim/UltiSnips"
-ln -fs "${HOME}/dotfiles/vim/typescript.snippets" "${HOME}/.vim/UltiSnips/typescript.snippets"
+ln -fs "${HOME}/dotfiles/vim/gitrebase.snippets" "${HOME}/.vim/UltiSnips/gitrebase.snippets"
 
 vim +PlugInstall +qall
 

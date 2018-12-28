@@ -50,6 +50,7 @@ Plug 'majutsushi/tagbar'
 Plug 'xsbeats/vim-blade'
 Plug 'itspriddle/vim-stripper'
 Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'briancollins/vim-jst'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'airblade/vim-gitgutter'
@@ -80,7 +81,6 @@ Plug 'sgur/vim-editorconfig'
 Plug 'rhysd/vim-clang-format'
 Plug 'ternjs/tern_for_vim'
 Plug 'flowtype/vim-flow'
-Plug 'isRuslan/vim-es6'
 Plug 'hashivim/vim-terraform'
 
 " All the colorschemes.
@@ -93,7 +93,6 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'embear/vim-localvimrc'
 Plug 'junegunn/seoul256.vim'
-Plug 'Chiel92/vim-autoformat'
 Plug 'w0rp/ale'
 
 
@@ -301,6 +300,7 @@ set completeopt=menuone,longest
 
 let g:Powerline_symbols = 'unicode'
 let g:deoplete#enable_at_startup = 1
+let g:UltiSnipsExpandTrigger="<tab>"
 
 " always open nerd tree in current directory
 function! ToggleNerdTree()
@@ -355,7 +355,7 @@ nnoremap <C-p> :FZF<cr>
 nnoremap <leader>t :GoTestFunc<CR>
 nnoremap <leader>m :History<CR>
 nnoremap <leader>b :Buffers<CR>
-noremap <leader>f :Autoformat<CR>
+nnoremap <leader>f :GoFillStruct<CR>
 
 " Go specific settings
 
