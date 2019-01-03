@@ -67,7 +67,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'rking/ag.vim'
 Plug 'lambdatoast/elm.vim'
 Plug 'Shougo/vimproc.vim'
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'commit': 'bc8e234049f4f05f118c476da82d939e8c003f68' }
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
