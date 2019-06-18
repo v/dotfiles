@@ -58,7 +58,7 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'vim-scripts/smarty-syntax'
 Plug 'derekwyatt/vim-scala'
 Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'tag': 'v1.19' }
 Plug 'mattn/webapi-vim'
 Plug 'yssl/QFEnter'
 Plug 'tpope/vim-unimpaired'
@@ -80,7 +80,6 @@ Plug 'leafgarland/typescript-vim'
 Plug 'sgur/vim-editorconfig'
 Plug 'rhysd/vim-clang-format'
 Plug 'ternjs/tern_for_vim'
-Plug 'flowtype/vim-flow'
 Plug 'hashivim/vim-terraform'
 
 " All the colorschemes.
@@ -364,7 +363,7 @@ let g:go_metalinter_autosave = 0
 
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
-  call go#cmd#Build(0)
+  call go#cmd#Build(1)
 endf
 
 if has('python')
@@ -404,6 +403,7 @@ let g:ale_linters = {'go': ['gometalinter', 'goimports']}
 let g:ale_go_gometalinter_options = '--fast'
 let g:terraform_align=1
 let g:flow#autoclose=1
+let g:go_def_mode = 'godef'
 
 nnoremap gh :call Github()<cr>
 
