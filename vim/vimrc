@@ -81,6 +81,7 @@ Plug 'sgur/vim-editorconfig'
 Plug 'rhysd/vim-clang-format'
 Plug 'ternjs/tern_for_vim'
 Plug 'hashivim/vim-terraform'
+Plug 'tpope/vim-surround'
 
 " All the colorschemes.
 Plug 'flazz/vim-colorschemes'
@@ -399,6 +400,17 @@ print(github_repo_url)
 EOF
 endfunction
 
+" Converts dates from the current line
+function! NormalizeDate()
+Py << EOF
+
+from dateutil.parser import parse
+import vim
+
+vim.current.line = str(parse(vim.current.line).date())
+EOF
+endfunction
+
 let g:ale_linters = {'go': ['gometalinter', 'goimports']}
 let g:ale_go_gometalinter_options = '--fast'
 let g:terraform_align=1
@@ -406,6 +418,7 @@ let g:flow#autoclose=1
 let g:go_def_mode = 'godef'
 
 nnoremap gh :call Github()<cr>
+nnoremap tt :call NormalizeDate()<cr>
 
 autocmd FileType go nmap <leader>gb :<C-u>call <SID>build_go_files()<CR>
 autocmd FileType go nmap <leader>gr :GoRun<CR>

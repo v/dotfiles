@@ -68,10 +68,16 @@ DIRS="${HOME}/bin
       /usr/local/bin
       /usr/sbin
       /sbin
-      /usr/local/Cellar/grep/2.20/bin
+      /usr/local/opt/coreutils/libexec/gnubin
+      /usr/local/opt/findutils/libexec/gnubin
+      /usr/local/opt/gettext/bin
+      /usr/local/opt/gnu-indent/libexec/gnubin
+      /usr/local/opt/gnu-sed/libexec/gnubin
+      /usr/local/opt/gnu-tar/libexec/gnubin
+      /usr/local/opt/grep/libexec/gnubin
+      /Users/vaibhav.verma/Library/Python/3.7/bin
       ./node_modules/.bin
       /usr/local/go/bin
-      /usr/local/opt/coreutils/libexec/gnubin
       $(go env GOPATH)/bin"
 for DIR in $DIRS; do
     if [[ -d "$DIR" ]] && [[ ":${PATH}:" != *":${DIR}:"* ]]; then
