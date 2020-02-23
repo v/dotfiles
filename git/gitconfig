@@ -1,6 +1,6 @@
 [user]
 	name = Vaibhav Verma
-	email = vaibhav2614@gmail.com
+	email = vaibhav.verma@getcruise.com
 [color]
     ui = true
 [diff]
@@ -16,8 +16,11 @@
     p = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellowllow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -p
     pr = pull-request
     pt = push-to-target
+    rc = rebase --continue
+    can = commit -a --amend --no-edit
     prt = pr-target
     pullr = pull --rebase
+    rbm = rebase -i origin/master
 
 [core]
 	filemode = false
@@ -29,3 +32,12 @@
     default = simple
 [rebase]
 	autoStash = true
+[hub]
+	host = github.robot.car
+[url "ssh://git@github.robot.car"]
+	insteadOf = https://github.robot.car
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

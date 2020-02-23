@@ -61,7 +61,7 @@ export FIGNORE=$FIGNORE:.pyc:.o:.gitignore
 # SSH agent setup, if available.
 [[ -e "${HOME}/.ssh/agent" ]] && source "${HOME}/.ssh/agent"
 
-export GOPATH=$(go env GOPATH)
+export GOPATH=$(/usr/local/go/bin/go env GOPATH)
 
 # Add various paths if they exist and aren't already in here.
 DIRS="${HOME}/bin
@@ -78,7 +78,9 @@ DIRS="${HOME}/bin
       /Users/vaibhav.verma/Library/Python/3.7/bin
       ./node_modules/.bin
       /usr/local/go/bin
-      $(go env GOPATH)/bin"
+      /usr/local/opt/coreutils/libexec/gnubin
+      $HOME/.gem/ruby/2.5.0/bin
+      $GOPATH/bin"
 for DIR in $DIRS; do
     if [[ -d "$DIR" ]] && [[ ":${PATH}:" != *":${DIR}:"* ]]; then
         if [[ -n "$PATH" ]]; then

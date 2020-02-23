@@ -71,6 +71,12 @@ Plug 'Shougo/deoplete.nvim', { 'commit': 'bc8e234049f4f05f118c476da82d939e8c003f
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'psf/black'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
 
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 if !&diff
@@ -79,7 +85,6 @@ endif
 Plug 'leafgarland/typescript-vim'
 Plug 'sgur/vim-editorconfig'
 Plug 'rhysd/vim-clang-format'
-Plug 'ternjs/tern_for_vim'
 Plug 'hashivim/vim-terraform'
 Plug 'tpope/vim-surround'
 
@@ -151,11 +156,7 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
-"Window movement mappings"
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
+nnoremap <c-h> :Ag <c-r><c-w>
 
 " Matching
 silent! runtime macros/matchit.vim
@@ -333,7 +334,6 @@ nnoremap _ :tab wincmd f<CR>
 
 " splits from quickfix
 let g:qfenter_vopen_map = ['<Bar>']
-let g:qfenter_topen_map = ['_']
 
 " open/close quickfix easily
 if !&diff
@@ -348,7 +348,7 @@ if executable('ag')
 endif
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
-autocmd QuickFixCmdPost *grep* cwindow
+autocmd BufRead,BufNewFile *.avsc setfiletype json
 
 let hostname = substitute(system('hostname'), '\n', '', '')
 nnoremap <C-p> :FZF<cr>
@@ -411,11 +411,26 @@ vim.current.line = str(parse(vim.current.line).date())
 EOF
 endfunction
 
-let g:ale_linters = {'go': ['gometalinter', 'goimports']}
+let g:ale_linters = {'go': ['gopls', 'goimports'], 'python': ['flake8', 'pylint'], 'javascript': ['flow-language-server'],}
+let g:ale_fixers = {'go': ['goimports']}
 let g:ale_go_gometalinter_options = '--fast'
 let g:terraform_align=1
-let g:flow#autoclose=1
-let g:go_def_mode = 'godef'
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:ale_fix_on_save = 1
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 0
+
+
+
+" Launch gopls when Go files are in use
+let g:LanguageClient_serverCommands = {
+       \ 'go': ['gopls'],
+       \ 'python': ['pyls'],
+       \ 'javascript': ['flow-language-server'],
+       \ }
+" Run gofmt on save
+autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 
 nnoremap gh :call Github()<cr>
 nnoremap tt :call NormalizeDate()<cr>
@@ -427,4 +442,5 @@ autocmd FileType go nmap \|  <Plug>(go-def-vertical)
 autocmd FileType go nmap <Leader>gi <Plug>(go-info)
 autocmd FileType c,cpp ClangFormatAutoEnable
 
-au BufWritePost *.go :call <SID>build_go_files()
+au BufWritePost *.py !black %
+set secure
