@@ -66,6 +66,7 @@ export GOPATH=$(/usr/local/go/bin/go env GOPATH)
 # Add various paths if they exist and aren't already in here.
 DIRS="${HOME}/bin
       /usr/local/bin
+      /usr/local/sbin
       /usr/sbin
       /sbin
       /usr/local/opt/coreutils/libexec/gnubin
@@ -75,7 +76,7 @@ DIRS="${HOME}/bin
       /usr/local/opt/gnu-sed/libexec/gnubin
       /usr/local/opt/gnu-tar/libexec/gnubin
       /usr/local/opt/grep/libexec/gnubin
-      /Users/vaibhav.verma/Library/Python/3.7/bin
+      /Users/vaibhav.verma/Library/Python/3.8/bin
       ./node_modules/.bin
       /usr/local/go/bin
       /usr/local/opt/coreutils/libexec/gnubin

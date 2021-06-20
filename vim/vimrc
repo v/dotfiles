@@ -82,7 +82,6 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 if !&diff
     Plug 'Quramy/tsuquyomi'
 endif
-Plug 'leafgarland/typescript-vim'
 Plug 'sgur/vim-editorconfig'
 Plug 'rhysd/vim-clang-format'
 Plug 'hashivim/vim-terraform'
@@ -96,9 +95,10 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'tomasr/molokai'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'embear/vim-localvimrc'
 Plug 'junegunn/seoul256.vim'
 Plug 'w0rp/ale'
+Plug 'elixir-editors/vim-elixir'
+
 
 
 filetype plugin indent on
@@ -413,6 +413,28 @@ endfunction
 
 let g:ale_linters = {'go': ['gopls', 'goimports'], 'python': ['flake8', 'pylint'], 'javascript': ['flow-language-server'],}
 let g:ale_fixers = {'go': ['goimports']}
+" Converts amounts from the current line
+function! NormalizePrice()
+Py << EOF
+
+import vim
+
+amount = vim.current.line
+amount = float(amount.strip().replace('$', '').replace(',', '').replace('−', '-'))
+
+sign = '+' if amount < 0 else '-'
+
+vim.current.line = '{}{} USD'.format(sign, abs(amount))
+EOF
+endfunction
+
+function! ReverseLines()
+:%s/\"\n/|/g
+:g/^/m0
+:%s/|/\"\r/g
+endfunction
+
+
 let g:ale_go_gometalinter_options = '--fast'
 let g:terraform_align=1
 let g:go_def_mode='gopls'
@@ -434,6 +456,7 @@ autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 
 nnoremap gh :call Github()<cr>
 nnoremap tt :call NormalizeDate()<cr>
+nnoremap $$ :call NormalizePrice()<cr>
 
 autocmd FileType go nmap <leader>gb :<C-u>call <SID>build_go_files()<CR>
 autocmd FileType go nmap <leader>gr :GoRun<CR>
