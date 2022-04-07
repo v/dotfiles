@@ -1,0 +1,13 @@
+snippet main
+package main
+
+func main() {
+	if err := mainHelper(); err != nil {
+		log.Fatalf("%+v", err)
+	}
+}
+
+func mainHelper() error {
+	return nil
+}
+endsnippet
