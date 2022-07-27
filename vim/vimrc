@@ -45,7 +45,6 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'scrooloose/nerdcommenter'
-Plug 'SirVer/ultisnips'
 Plug 'majutsushi/tagbar'
 Plug 'xsbeats/vim-blade'
 Plug 'itspriddle/vim-stripper'
@@ -67,21 +66,14 @@ Plug 'junegunn/fzf.vim'
 Plug 'rking/ag.vim'
 Plug 'lambdatoast/elm.vim'
 Plug 'Shougo/vimproc.vim'
-Plug 'Shougo/deoplete.nvim', { 'commit': 'bc8e234049f4f05f118c476da82d939e8c003f68' }
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'psf/black'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 
 Plug 'zchee/deoplete-go', { 'do': 'make'}
-if !&diff
-    Plug 'Quramy/tsuquyomi'
-endif
 Plug 'sgur/vim-editorconfig'
 Plug 'rhysd/vim-clang-format'
 Plug 'hashivim/vim-terraform'
@@ -96,7 +88,7 @@ Plug 'tomasr/molokai'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'junegunn/seoul256.vim'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'elixir-editors/vim-elixir'
 
 
@@ -412,7 +404,11 @@ EOF
 endfunction
 
 let g:ale_linters = {'go': ['gopls', 'goimports'], 'python': ['flake8', 'pylint'], 'javascript': ['flow-language-server'],}
-let g:ale_fixers = {'go': ['goimports']}
+let g:ale_fixers = {
+\   'go': ['goimports'],
+\   'javascript': ['prettier'],
+\   'css': ['prettier'],
+\}
 " Converts amounts from the current line
 function! NormalizePrice()
 Py << EOF
@@ -464,6 +460,8 @@ autocmd FileType go nmap <leader>gt :GoTest<CR>
 autocmd FileType go nmap \|  <Plug>(go-def-vertical)
 autocmd FileType go nmap <Leader>gi <Plug>(go-info)
 autocmd FileType c,cpp ClangFormatAutoEnable
+
+nnoremap <Leader>gd :call CocActionAsync('jumpDefinition')<CR>
 
 au BufWritePost *.py !black %
 set secure
