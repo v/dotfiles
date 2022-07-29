@@ -57,7 +57,7 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'vim-scripts/smarty-syntax'
 Plug 'derekwyatt/vim-scala'
 Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'fatih/vim-go', { 'tag': 'v1.19' }
+Plug 'fatih/vim-go'
 Plug 'mattn/webapi-vim'
 Plug 'yssl/QFEnter'
 Plug 'tpope/vim-unimpaired'
