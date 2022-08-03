@@ -64,6 +64,8 @@ Plug 'hashivim/vim-terraform'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'tpope/vim-abolish'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'elzr/vim-json'
+Plug 'mogelbrod/vim-jsonpath'
 
 
 " All the colorschemes.
@@ -571,10 +573,8 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" Don't show coc in vim airline
+let g:airline#extensions#coc#enabled = 0
 
 " Mappings for CoCList
 " Show all diagnostics.
