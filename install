@@ -4,6 +4,8 @@ set -eu
 
 cd "${HOME}"
 
+mkdir -p "${HOME}/.config/nvim"
+
 # Link in files, replacing whatever's already there.
 ln -fs "${HOME}/dotfiles/bash/bashrc"       "${HOME}/.bashrc"
 ln -fs "${HOME}/dotfiles/bash/bash_profile" "${HOME}/.bash_profile"
@@ -13,6 +15,7 @@ ln -fs "${HOME}/dotfiles/git/gitignore_global"     "${HOME}/.gitignore_global"
 ln -fs "${HOME}/dotfiles/npm/npmrc"         "${HOME}/.npmrc"
 ln -fs "${HOME}/dotfiles/tmux/tmux.conf"    "${HOME}/.tmux.conf"
 ln -fs "${HOME}/dotfiles/vim/vimrc"         "${HOME}/.vimrc"
+ln -fs "${HOME}/dotfiles/vim/init.vim"        "${HOME}/.config/nvim/init.vim"
 ln -fs "${HOME}/dotfiles/X/Xresources"         "${HOME}/.Xresources"
 
 # Link in directories, removing whatever's already there first.

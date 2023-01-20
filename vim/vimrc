@@ -66,6 +66,7 @@ Plug 'tpope/vim-abolish'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'elzr/vim-json'
 Plug 'mogelbrod/vim-jsonpath'
+Plug 'knsh14/vim-github-link'
 
 
 " All the colorschemes.
@@ -161,7 +162,7 @@ set shortmess+=I
 
 " Miscellaneous
 set backspace=indent,eol,start
-set modelines=0
+set modelines=1
 set report=0
 
 set number
@@ -324,7 +325,7 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 autocmd BufRead,BufNewFile *.avsc setfiletype json
 
 let hostname = substitute(system('hostname'), '\n', '', '')
-nnoremap <C-p> :FZF<cr>
+nnoremap <C-p> :GFiles<cr>
 nnoremap <leader>t :GoTestFunc<CR>
 nnoremap <leader>m :History<CR>
 nnoremap <leader>b :Buffers<CR>
@@ -345,33 +346,6 @@ if has('python')
 elseif has('python3')
   command! -nargs=* Py python3 <args>
 endif
-
-" Gets the URL to a file on github
-function! Github()
-Py << EOF
-
-import vim
-import subprocess
-import os, sys, re
-
-def get_cmd_output(cmd):
-    return subprocess.check_output(cmd).rstrip().decode('utf-8')
-
-file_name = vim.current.buffer.name
-path = os.path.realpath(file_name)
-
-git_branch = get_cmd_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD'])
-if '/' in git_branch:
-    blob_path = get_cmd_output(['git', 'rev-parse', 'HEAD'])
-else:
-    blob_path = git_branch
-file_path = get_cmd_output(['git', 'ls-tree', '--full-name', '--name-only', 'HEAD', path])
-current_line = vim.current.range.start + 1
-
-github_repo_url = get_cmd_output(['hub', 'browse', '-u', '--', 'blob/%s/%s#L%d' % (blob_path, file_path, current_line)])
-print(github_repo_url)
-EOF
-endfunction
 
 " Converts dates from the current line
 function! NormalizeDate()
@@ -414,7 +388,7 @@ let g:ale_fix_on_save = 1
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
 
-nnoremap gh :call Github()<cr>
+nnoremap gh :GetCurrentBranchLink<cr>
 nnoremap tt :call NormalizeDate()<cr>
 nnoremap $$ :call NormalizePrice()<cr>
 
