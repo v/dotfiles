@@ -160,6 +160,7 @@ alias ls="ls ${LS_OPTS}"
 alias grep="grep ${GREP_OPTS}"
 alias vi="vim"
 alias view="vim -R"
+alias k="kubectl"
 
 # I always do this, and I hate slow train.
 alias sl='ls'
@@ -245,11 +246,6 @@ function prompt {
     esac
 }
 
-function imgshare {
-    scp $1 imgshare.etsycorp.com:/var/www/imgshare/vverma/
-    echo "http://imgshare.etsycorp.com/vverma/$1" | pbcopy
-}
-
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 #some machines dont keep my sudo.
@@ -262,7 +258,7 @@ alias racket="racket -il xrepl"
 alias vac="source ENV/bin/activate"
 
 if [[ -n "$TMUX" ]]; then
-    alias ew="cd -P ~/code/$(tmux display-message -p '#S')"
+    alias ew="cd -P ~/code/betteromics/$(tmux display-message -p '#S')"
 fi
 
 do_giff() {
@@ -282,7 +278,6 @@ alias giff=do_giff
 prompt on
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export GIT_COMPLETION_CHECKOUT_NO_GUESS=1
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
