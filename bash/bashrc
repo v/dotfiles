@@ -277,6 +277,15 @@ alias giff=do_giff
 # Start with full-fledged prompt.
 prompt on
 
+# if fd exists as a command then use it for fzf
+if command -v fd &> /dev/null
+then
+    # Setting fd as the default source for fzf
+    export FZF_DEFAULT_COMMAND='fd --strip-cwd-prefix'
+    # To apply the command to CTRL-T as well
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
