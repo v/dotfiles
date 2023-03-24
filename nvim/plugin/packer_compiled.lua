@@ -104,6 +104,11 @@ _G.packer_plugins = {
     path = "/Users/vaibhav/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["copilot.vim"] = {
+    loaded = true,
+    path = "/Users/vaibhav/.local/share/nvim/site/pack/packer/start/copilot.vim",
+    url = "https://github.com/github/copilot.vim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/Users/vaibhav/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -160,6 +165,11 @@ _G.packer_plugins = {
     path = "/Users/vaibhav/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ripgrep = {
+    loaded = true,
+    path = "/Users/vaibhav/.local/share/nvim/site/pack/packer/start/ripgrep",
+    url = "https://github.com/BurntSushi/ripgrep"
+  },
   ["seoul256.vim"] = {
     config = { "\27LJ\2\n8\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\25colorscheme seoul256\bcmd\bvim\0" },
     loaded = true,
@@ -189,14 +199,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: jellybeans.vim
-time([[Config for jellybeans.vim]], true)
-try_loadstring("\27LJ\2\nw\0\0\4\0\6\0\r6\0\0\0009\0\1\0009\0\2\0)\2\0\0'\3\3\0B\0\3\2\15\0\0\0X\1\4€6\0\0\0009\0\4\0'\2\5\0B\0\2\1K\0\1\0\27colorscheme jellybeans\bcmd\tdiff\24nvim_win_get_option\bapi\bvim\0", "config", "jellybeans.vim")
-time([[Config for jellybeans.vim]], false)
 -- Config for: seoul256.vim
 time([[Config for seoul256.vim]], true)
 try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\25colorscheme seoul256\bcmd\bvim\0", "config", "seoul256.vim")
 time([[Config for seoul256.vim]], false)
+-- Config for: jellybeans.vim
+time([[Config for jellybeans.vim]], true)
+try_loadstring("\27LJ\2\nw\0\0\4\0\6\0\r6\0\0\0009\0\1\0009\0\2\0)\2\0\0'\3\3\0B\0\3\2\15\0\0\0X\1\4€6\0\0\0009\0\4\0'\2\5\0B\0\2\1K\0\1\0\27colorscheme jellybeans\bcmd\tdiff\24nvim_win_get_option\bapi\bvim\0", "config", "jellybeans.vim")
+time([[Config for jellybeans.vim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

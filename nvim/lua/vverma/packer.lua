@@ -9,7 +9,7 @@ return require('packer').startup(function(use)
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.1',
         -- or                            , branch = '0.1.x',
-        requires = { {'nvim-lua/plenary.nvim'} }
+        requires = { {'nvim-lua/plenary.nvim'}, { 'BurntSushi/ripgrep' } }
     }
 
     use 'tomasr/molokai'
@@ -55,4 +55,6 @@ return require('packer').startup(function(use)
     }
 
     use 'patoconnor43/sourcegraph-vim'
+    use "github/copilot.vim"
+
 end)
