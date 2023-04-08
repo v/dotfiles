@@ -3,11 +3,16 @@ require("nvim-tree").setup({
     disable_netrw = true,
     hijack_netrw = true,
     open_on_setup = false,
-    update_cwd = true,
+    sync_root_with_cwd = true,
+    respect_buf_cwd = true,
     git = {
         enable = true,
         ignore = true,
         timeout = 500,
+    },
+    update_focused_file = {
+        enable = true,
+        update_root = true
     },
 })
 

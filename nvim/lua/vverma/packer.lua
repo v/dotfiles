@@ -54,7 +54,6 @@ return require('packer').startup(function(use)
         }
     }
 
-    use 'patoconnor43/sourcegraph-vim'
     use "github/copilot.vim"
 
     use {
@@ -63,4 +62,21 @@ return require('packer').startup(function(use)
            'nvim-tree/nvim-web-devicons',
         },
     }
+    use 'tpope/vim-commentary'
+
+    use {
+        "folke/trouble.nvim",
+        requires = "nvim-tree/nvim-web-devicons",
+        config = function()
+            require("trouble").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
+    }
+
+    use('jose-elias-alvarez/null-ls.nvim')
+    use('MunifTanjim/prettier.nvim')
+
 end)
