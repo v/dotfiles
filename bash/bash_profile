@@ -2,6 +2,6 @@ if [ -f /etc/profile ]; then
     source /etc/profile
 fi
 
-[[ -s "/opt/homebrew/bin/brew" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+command -v brew > /dev/null 2>&1 && eval "$(brew shellenv)"
 
 source $HOME/.bashrc
