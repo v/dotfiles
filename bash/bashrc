@@ -79,6 +79,7 @@ DIRS="${HOME}/bin
       /Users/vverma/Library/Python/3.9/bin
       ./node_modules/.bin
       /usr/local/go/bin
+      /opt/homebrew/bin
       /usr/local/opt/coreutils/libexec/gnubin
       /opt/homebrew/opt/grep/libexec/gnubin
       $HOME/.gem/ruby/2.5.0/bin
@@ -251,15 +252,12 @@ export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 #some machines dont keep my sudo.
 alias sudo="sudo -E"
 
-# A nice alias for JSON viewing
-alias json="python -mjson.tool"
-
-alias racket="racket -il xrepl"
-alias vac="source ENV/bin/activate"
-
-if [[ -n "$TMUX" ]]; then
-    alias ew="cd -P ~/code/betteromics/$(tmux display-message -p '#S')"
-fi
+ew() {
+    TMUX_SERVER_NAME="$(tmux display-message -p '#S' 2>/dev/null)"
+    if [[ -n "$TMUX" ]]; then
+        cd -P "~/code/betteromics/$TMUX_SERVER_NAME"
+    fi
+}
 
 do_giff() {
     ffmpeg -i "$1" -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=6 > "$1.gif";
