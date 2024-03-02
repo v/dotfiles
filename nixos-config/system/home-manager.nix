@@ -305,9 +305,7 @@ end)
 -- When you don't have mason.nvim installed
 -- You'll need to list the servers installed in your system
 lsp_zero.setup_servers({'tsserver', 'eslint', 'pyright'})
-
 lsp_zero.setup()
-lsp_zero.setup_nvim_cmp({})
 
 
 -- Completions
@@ -321,6 +319,7 @@ cmp.setup({
     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['Tab'] = nil,
     ['<S-Tab>'] = nil,
@@ -330,9 +329,6 @@ cmp.setup({
 '';
           }
         ];
-
       };
-
-      # needs ftplugin migrated to the runtime folder
     };
   }
