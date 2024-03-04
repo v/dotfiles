@@ -83,6 +83,7 @@ DIRS="${HOME}/bin
       /usr/local/opt/coreutils/libexec/gnubin
       /opt/homebrew/opt/grep/libexec/gnubin
       $HOME/.gem/ruby/2.5.0/bin
+      $HOME/.cargo/bin
       $GOPATH/bin"
 for DIR in $DIRS; do
     if [[ -d "$DIR" ]] && [[ ":${PATH}:" != *":${DIR}:"* ]]; then

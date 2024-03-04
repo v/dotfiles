@@ -23,6 +23,8 @@ vim.opt.colorcolumn = "80"
 vim.opt.wildmenu = true
 vim.opt.wildmode = "longest:list"
 
+vim.opt.mouse = "r"
+
 -- disable netrw in favor of nvim-tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
