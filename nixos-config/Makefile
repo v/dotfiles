@@ -76,11 +76,15 @@ vm/copy:
 		--exclude='iso/' \
 		--exclude='Makefile' \
 		--rsync-path="sudo rsync" \
-		$(MAKEFILE_DIR)/system/* $(NIXUSER)@$(NIXADDR):/etc/nixos/
+		$(MAKEFILE_DIR)/* $(NIXUSER)@$(NIXADDR):/etc/nixos/
 
 # run the nixos-rebuild switch command. This does NOT copy files so you
 # have to run vm/copy before.
 vm/switch:
 	ssh $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR) " \
 		sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch \
+
+vm/switch2:
+	ssh $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR) " \
+		sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake '.#default' \
 	"

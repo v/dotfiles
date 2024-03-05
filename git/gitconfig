@@ -33,10 +33,6 @@
     default = simple
 [rebase]
 	autoStash = true
-[hub]
-	host = github.robot.car
-[url "ssh://git@github.robot.car"]
-	insteadOf = https://github.robot.car
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

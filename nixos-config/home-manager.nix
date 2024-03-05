@@ -1,8 +1,9 @@
-I want to refactor the neovim section of this file into its own nix module (neovim.nix). What do I place in this file and in neovim.nix to complete this refactor?
-
 { config, pkgs, ... }:
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
+  home-manager = builtins.fetchTarball {
+    url = "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
+    sha256 = "0562y8awclss9k4wk3l4akw0bymns14sfy2q9n23j27m68ywpdkh";
+  };
   telescope = pkgs.vimUtils.buildVimPlugin {
     name = "telescope";
     src = pkgs.fetchFromGitHub {
@@ -56,6 +57,7 @@ in
         ffmpeg
         imagemagick
         pandoc
+        nodejs_21
         pkgs.nodePackages.typescript-language-server
         pkgs.nodePackages.pyright
         pkgs.vscode-langservers-extracted
