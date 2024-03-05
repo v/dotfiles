@@ -75,8 +75,13 @@ vm/copy:
 		--exclude='.git-crypt/' \
 		--exclude='iso/' \
 		--exclude='Makefile' \
+		--delete \
 		--rsync-path="sudo rsync" \
 		$(MAKEFILE_DIR)/* $(NIXUSER)@$(NIXADDR):/etc/nixos/
+
+# copy the lock file back from the VM
+vm/cplock:
+	scp -P$(NIXPORT) $(NIXUSER)@$(NIXADDR):/etc/nixos/flake.lock $(MAKEFILE_DIR)/flake.lock
 
 # run the nixos-rebuild switch command. This does NOT copy files so you
 # have to run vm/copy before.

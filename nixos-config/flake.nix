@@ -24,7 +24,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.vaibhav = import ./plain-home-manager.nix;
+          home-manager.users.vaibhav = import ./home-manager.nix;
         }
       ];
     };

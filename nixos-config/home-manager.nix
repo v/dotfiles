@@ -37,6 +37,40 @@ in {
     enable = true;
     userName = "Vaibhav";
     userEmail = "vaibhav@betteromics.com";
+
+    aliases = {
+      s = "status";
+      st = "status";
+      d = "difftool";
+      co = "checkout";
+      l = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+      p = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -p";
+      po = "push --set-upstream origin HEAD";
+      pr = "pull-request";
+      pt = "push-to-target";
+      rc = "rebase --continue";
+      can = "commit -a --amend --no-edit";
+      prt = "pr-target";
+      pullr = "pull --rebase";
+      rbm = "rebase -i origin/master";
+    };
+
+    extraConfig = {
+      diff.tool = "vimdiff";
+      difftool.prompt = false;
+      color.ui = true;
+      core.filemode = false;
+      core.editor = "nvim";
+      log.date = "local";
+      pull.rebase = "true";
+      push.default = "simple";
+      rebase.autoStash = true;
+      filter.lfs.clean = "git-lfs clean -- %f";
+      filter.lfs.smudge = "git-lfs smudge -- %f";
+      filter.lfs.process = "git-lfs filter-process";
+      filter.lfs.required = true;
+      submodule.recurse = true;
+    };
   };
 
   programs.bash = {
@@ -62,7 +96,6 @@ in {
     pkgs.nodePackages.typescript-language-server
     pkgs.nodePackages.pyright
     pkgs.vscode-langservers-extracted
-
   ];
 
   home.stateVersion = "23.11";
@@ -73,6 +106,7 @@ in {
     enable = true;
     vimAlias = true;
     viAlias = true;
+    vimdiffAlias = true;
     defaultEditor = true;
     extraLuaConfig = ''
     vim.opt.guicursor = ""
