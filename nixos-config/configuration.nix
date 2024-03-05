@@ -132,13 +132,13 @@
   virtualisation.vmware.guest.enable = true;
 
   # Share our host filesystem
-  fileSystems."/host" = {
+  fileSystems."/Users" = {
     fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
     device = ".host:/";
     options = [
-      "umask=22"
       "uid=1000"
-      "gid=1000"
+      "gid=100"
+      "nofail"
       "allow_other"
       "auto_unmount"
       "defaults"
