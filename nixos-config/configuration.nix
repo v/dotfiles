@@ -1,26 +1,149 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [ 
       ./hardware-configuration.nix
-      ./vm-aarch64.nix
-      ./home-manager.nix
+      ./vmware-guest.nix
     ];
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
+  networking.hostName = "nixos-vm"; # Define your hostname.
   networking.networkmanager.enable = true;
+  # Disable the firewall since we're in a VM and we want to make it
+  # easy to visit stuff in here. We only use NAT networking anyways.
+  networking.firewall.enable = false;
+
+  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
+  # Per-interface useDHCP will be mandatory in the future, so this generated config
+  # replicates the default behaviour.
+  networking.useDHCP = false;
+
+  # Interface is this on M1
+  networking.interfaces.ens160.useDHCP = true;
+
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  # VMware, Parallels both only support this being 0 otherwise you see
+  # "error switching console mode" on boot.
+  boot.loader.systemd-boot.consoleMode = "0";
+
+  # Setup qemu so we can run x86_64 binaries
+  boot.binfmt.emulatedSystems = ["x86_64-linux"];
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  services.openssh.enable = true;
+  services.openssh.settings.PasswordAuthentication = true;
+  services.openssh.settings.PermitRootLogin = "yes";
+  users.users.root.initialPassword = "root";
+
+  # Set your time zone.
+  time.timeZone = "America/Los_Angeles";
+
+  # Select internationalisation properties.
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    inputMethod = {
+      enabled = "fcitx5";
+      fcitx5.addons = with pkgs; [
+        fcitx5-mozc
+        fcitx5-gtk
+        fcitx5-chinese-addons
+      ];
+    };
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
+  };
+
+  # Don't require password for sudo
+  security.sudo.wheelNeedsPassword = false;
+
+  # Virtualization settings
+  virtualisation.docker.enable = true;
+
+  # Lots of stuff that uses aarch64 that claims doesn't work, but actually works.
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnsupportedSystem = true;
+
+  nix = {
+    # use unstable nix so we can access flakes
+    package = pkgs.nixUnstable;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+      keep-outputs = true
+      keep-derivations = true
+    '';
+  };
+
+  environment.variables = {
+    # Set the default editor.
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
+
+  environment.shellAliases = {
+    vim = "nvim";
+    vi = "nvim";
+    sudo = "sudo ";
+  };
+
+  environment.systemPackages = with pkgs; [
+    gnumake
+    killall
+    niv
+    rxvt_unicode
+    xclip
+    git
+    tmux
+    wget
+    neovim
+    llm
+    silver-searcher
+
+
+    # For hypervisors that support auto-resizing, this script forces it.
+    # I've noticed not everyone listens to the udev events so this is a hack.
+    (writeShellScriptBin "xrandr-auto" ''
+      xrandr --output Virtual-1 --auto
+    '')
+
+    # This is needed for the vmware user tools clipboard to work.
+    # You can test if you don't need this by deleting this and seeing
+    # if the clipboard sill works.
+    gtkmm3
+  ];
+
+
+  # Disable the default module and import our override. We have
+  # customizations to make this work on aarch64.
+  disabledModules = [ "virtualisation/vmware-guest.nix" ];
+
+  # This works through our custom module imported above
+  virtualisation.vmware.guest.enable = true;
+
+  # Share our host filesystem
+  fileSystems."/host" = {
+    fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
+    device = ".host:/";
+    options = [
+      "umask=22"
+      "uid=1000"
+      "gid=1000"
+      "allow_other"
+      "auto_unmount"
+      "defaults"
+    ];
+  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -33,78 +156,44 @@
   services.xserver = {
     layout = "us";
     xkbVariant = "";
+    xkbOptions = "caps:escape";
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
-  # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+  ## OS user config
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
+  # Add ~/.local/bin to PATH
+  environment.localBinInPath = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.vaibhav = {
     isNormalUser = true;
-    description = "Vaibhav";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      firefox
+    home = "/home/vaibhav";
+    hashedPassword = "$y$j9T$ajets3mVmRq4n/So8GYCD1$g3SoYHjEbwrJ2XXTOGRTDGKZhbPb7ANo6Oesskz5UwD";
+    extraGroups = [ "docker" "wheel" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII6/a5fVBGiYd4LfP4POWHUPIq5LeibpJO41Obxx9gOS vaibhav@betteromics.com"
     ];
   };
 
-  # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "vaibhav";
-
-  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnsupportedSystem = true;
-
-  environment.shellAliases = {
-    vim = "nvim";
-    vi = "nvim";
-    sudo = "sudo ";
-  };
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # vmware tools to allow home directory sharing
-  virtualisation.vmware.guest.enable = true;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  # This option defines the first version of NixOS you have installed on this particular machine,
+  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
+  #
+  # Most users should NEVER change this value after the initial install, for any reason,
+  # even if you've upgraded your system to a new NixOS release.
+  #
+  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
+  # so changing it will NOT upgrade your system.
+  #
+  # This value being lower than the current NixOS release does NOT mean your system is
+  # out of date, out of support, or vulnerable.
+  #
+  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
+  # and migrated your data accordingly.
+  #
+  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "23.11"; # Did you read the comment?
+ 
+		
 
 }
+
