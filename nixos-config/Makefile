@@ -89,3 +89,7 @@ vm/switch:
 	ssh $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR) " \
 		sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake '/etc/nixos#default' \
 	"
+
+local/deploy:
+	cp *.nix flake.lock /etc/nixos
+	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake '/etc/nixos#default'
