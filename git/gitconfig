@@ -4,7 +4,7 @@
 [color]
     ui = true
 [diff]
-	tool = vimdiff
+	tool = nvimdiff
 [difftool]
 	prompt = false
 [alias]

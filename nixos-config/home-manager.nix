@@ -121,7 +121,7 @@ in {
     };
 
     home.packages = with pkgs; [
-      awscli2
+      awscli
       bat
       blackbox-terminal
       fd
@@ -145,6 +145,7 @@ in {
       unzip
       visidata
       zip
+      yq-go
     ];
 
     home.stateVersion = "23.11";
@@ -156,6 +157,11 @@ in {
     programs.home-manager.enable = true;
 
     programs.fzf = {
+      enable = true;
+      enableBashIntegration = true;
+    };
+
+    programs.zoxide = {
       enable = true;
       enableBashIntegration = true;
     };
@@ -220,36 +226,6 @@ in {
       '';
     };
 
-
-    programs.vscode = {
-      enable = true;
-      extensions = with pkgs.vscode-extensions; [
-        dbaeumer.vscode-eslint
-        eamodio.gitlens
-        esbenp.prettier-vscode
-        formulahendry.auto-rename-tag
-        github.copilot
-        github.copilot-chat
-        ms-python.black-formatter
-        ms-python.isort
-        ms-python.python
-        ms-python.vscode-pylance
-        ms-toolsai.jupyter
-        ms-toolsai.jupyter-keymap
-        ms-toolsai.jupyter-renderers
-        ms-toolsai.vscode-jupyter-cell-tags
-        ms-toolsai.vscode-jupyter-slideshow
-        redhat.vscode-xml
-        zxh404.vscode-proto3
-      ];
-    };
-
-    programs.direnv = {
-      enable = true;
-      enableBashIntegration = true;
-
-      nix-direnv.enable = true;
-    };
 
     programs.neovim = {
       enable = true;
