@@ -1,4 +1,7 @@
+{ username, ... }:
+
 { lib, pkgs, ... }:
+
 let  
   telescope = pkgs.vimUtils.buildVimPlugin {
     name = "telescope";
@@ -28,8 +31,8 @@ let
     };
   };
 in {
-  home.homeDirectory = lib.mkForce "/Users/vaibhav";
-  home.username = lib.mkForce "vaibhav";
+  home.homeDirectory = lib.mkForce "/Users/${username}";
+  home.username = username;
 
   # Example Home Manager configuration
   programs.git = {

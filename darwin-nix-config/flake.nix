@@ -16,55 +16,55 @@
 
   outputs = inputs@{ self, darwin, nixpkgs, nixpkgs-unstable, home-manager }:
   let
-    configuration = { pkgs, ... }: {
-      # List packages installed in system profile. To search by name, run:
-      # $ nix-env -qaP | grep wget
-      environment.systemPackages = with pkgs; [
-        coreutils
-      ];
+    mkDarwinSystem = { hostname, username }: darwin.lib.darwinSystem {
+      modules = [
+        ({pkgs, ...}: {
+          environment.systemPackages = with pkgs; [
+            coreutils
+          ];
 
-      # Auto upgrade nix package and the daemon service.
-      services.nix-daemon.enable = true;
-      # nix.package = pkgs.nix;
+          services.nix-daemon.enable = true;
 
-      # Necessary for using flakes on this system.
-      nix.settings.experimental-features = "nix-command flakes";
+          nix.settings.experimental-features = "nix-command flakes";
 
-      # Set Git commit hash for darwin-version.
-      system.configurationRevision = self.rev or self.dirtyRev or null;
+          system.configurationRevision = self.rev or self.dirtyRev or null;
 
-      # Used for backwards compatibility, please read the changelog before changing.
-      # $ darwin-rebuild changelog
-      system.stateVersion = 4;
+          system.stateVersion = 4;
 
-      # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "x86_64-darwin";
-      nixpkgs.config.allowUnfree = true;
-      nixpkgs.config.allowUnsupportedSystem = true;
+          nixpkgs.hostPlatform = "x86_64-darwin";
+          nixpkgs.config.allowUnfree = true;
+          nixpkgs.config.allowUnsupportedSystem = true;
 
-      users.users.vaibhav = {
-        home = "/Users/vaibhav";
-        shell = pkgs.bash;
-      };
-
-    };
-  in
-  {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#simple
-    darwinConfigurations."Vaibhavs-Laptop" = darwin.lib.darwinSystem {
-      modules = [ 
-        configuration 
+          users.users.${username} = {
+            home = "/Users/${username}";
+            shell = pkgs.bash;
+          };
+        })
         home-manager.darwinModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.vaibhav = import ./home-manager.nix;
+          home-manager.users.${username} = import ./home-manager.nix { 
+            username = username;
+          };
         }
       ];
     };
+  in
+  {
+    darwinConfigurations = {
+      "Vaibhavs-MacBook-Pro" = mkDarwinSystem {
+        hostname = "Vaibhavs-MacBook-Pro";
+        username = "vverma";
+      };
+
+      "Vaibhavs-Laptop" = mkDarwinSystem {
+        hostname = "Vaibhavs-Laptop";
+        username = "vaibhav";
+      };
+    };
 
     # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."Vaibhavs-Laptop".pkgs;
+    darwinPackages = builtins.mapAttrs (hostname: config: config.pkgs) self.darwinConfigurations;
   };
 }
