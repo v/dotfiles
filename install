@@ -5,6 +5,7 @@ set -eu
 cd "${HOME}"
 
 mkdir -p "${HOME}/.config/nvim"
+mkdir -p "${HOME}/.config/kitty"
 
 # Link in files, replacing whatever's already there.
 ln -fs "${HOME}/dotfiles/bash/bashrc"       "${HOME}/.bashrc"
@@ -17,6 +18,7 @@ ln -fs "${HOME}/dotfiles/tmux/tmux.conf"    "${HOME}/.tmux.conf"
 ln -fs "${HOME}/dotfiles/vim/vimrc"         "${HOME}/.vimrc"
 ln -fs "${HOME}/dotfiles/nvim"        "${HOME}/.config/"
 ln -fs "${HOME}/dotfiles/X/Xresources"         "${HOME}/.Xresources"
+ln -fs "${HOME}/dotfiles/kitty.conf"         "${HOME}/..config/kitty/kitty.conf"
 
 # Link in directories, removing whatever's already there first.
 if [ -e "${HOME}/.vim/bundle" ]; then
@@ -37,8 +39,3 @@ ln -fs ${HOME}/dotfiles/bin/git-push-to-target ${HOME}/bin/git-push-to-target
 ln -fs ${HOME}/dotfiles/bin/git-pr-target ${HOME}/bin/git-pr-target
 
 vim +PlugInstall +qall
-
-if [ -e "${HOME}/.config/awesome" ]; then
-    ln -fs "${HOME}/dotfiles/X/awesome-rc.lua" "${HOME}/.config/awesome/rc.lua"
-    ln -fs "${HOME}/dotfiles/X/awesome-battery.lua" "${HOME}/.config/awesome/battery.lua"
-fi
