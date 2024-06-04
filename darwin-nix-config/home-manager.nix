@@ -425,6 +425,8 @@ in {
               vim.opt_local.shiftwidth = 2
               '';
             };
+            type = "lua";
+            config = ''vim.keymap.set("n", "<leader>f", function() vim.cmd("Prettier") end)'';
           }
 
           # lsp plugins
