@@ -57,10 +57,9 @@
         hostname = "Vaibhavs-MacBook-Pro";
         username = "vverma";
       };
-
-      "Vaibhavs-Laptop" = mkDarwinSystem {
-        hostname = "Vaibhavs-Laptop";
-        username = "vaibhav";
+      "vvscale" = mkDarwinSystem {
+        hostname = "vvscale";
+        username = "vaibhav.verma";
       };
     };
 
