@@ -109,7 +109,7 @@ in {
   };
 
   home.packages = with pkgs; [
-    awscli
+    awscli2
     bat
     corepack
     devbox
