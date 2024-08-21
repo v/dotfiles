@@ -37,8 +37,8 @@ in {
   # Example Home Manager configuration
   programs.git = {
     enable = true;
-    userName = "Vaibhav";
-    userEmail = "vaibhav@betteromics.com";
+    userName = "Vaibhav Verma";
+    userEmail = "vaibhav.verma@scale.com";
 
     aliases = {
       s = "status";
@@ -73,6 +73,7 @@ in {
       filter.lfs.process = "git-lfs filter-process";
       filter.lfs.required = true;
       submodule.recurse = true;
+      remote.origin.prune = true;
     };
   };
 
@@ -130,6 +131,7 @@ in {
     python311
     python311Packages.lxml
     python311Packages.pip
+    python311Packages.pipx
     silver-searcher
     teleport
     tldr

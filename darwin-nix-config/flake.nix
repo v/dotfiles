@@ -31,7 +31,7 @@
 
           system.stateVersion = 4;
 
-          nixpkgs.hostPlatform = "x86_64-darwin";
+          nixpkgs.hostPlatform = "aarch64-darwin";
           nixpkgs.config.allowUnfree = true;
           nixpkgs.config.allowUnsupportedSystem = true;
 
@@ -59,6 +59,10 @@
       };
       "vvscale" = mkDarwinSystem {
         hostname = "vvscale";
+        username = "vaibhav.verma";
+      };
+      "SCMM0VDYF00M0" = mkDarwinSystem {
+        hostname = "SCMM0VDYF00M0";
         username = "vaibhav.verma";
       };
     };
