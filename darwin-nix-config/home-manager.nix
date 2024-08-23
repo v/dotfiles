@@ -112,8 +112,6 @@ in {
   home.packages = with pkgs; [
     awscli2
     bat
-    corepack
-    devbox
     fd
     ffmpeg
     git
@@ -122,16 +120,7 @@ in {
     imagemagick
     jq
     moreutils
-    nodejs_21
     pandoc
-    pkgs.nodePackages.pyright
-    pkgs.nodePackages.typescript-language-server
-    pkgs.vscode-langservers-extracted
-    poppler
-    python311
-    python311Packages.lxml
-    python311Packages.pip
-    python311Packages.pipx
     silver-searcher
     teleport
     tldr
