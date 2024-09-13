@@ -30,6 +30,7 @@ let
       sha256 = "0jd62dx6qzj60az36qc8rsj6aiqfc1jg7c4fgxl5rhjcws6b3wpj";
     };
   };
+  pkgsUnstable = import <nixpkgs-unstable> {};
 in {
   home.homeDirectory = lib.mkForce "/Users/${username}";
   home.username = username;
@@ -118,6 +119,7 @@ in {
     htop
     httpie
     imagemagick
+    jless
     jq
     moreutils
     pandoc
@@ -218,6 +220,7 @@ in {
         viAlias = true;
         vimdiffAlias = true;
         defaultEditor = true;
+        package = pkgsUnstable.neovim-unwrapped;
         extraLuaConfig = ''
         vim.opt.guicursor = ""
         vim.opt.nu = true
