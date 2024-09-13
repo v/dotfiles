@@ -10,13 +10,13 @@
 
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs = inputs@{ self, darwin, nixpkgs, nixpkgs-unstable, home-manager }:
   let
-    mkDarwinSystem = { hostname, username }: darwin.lib.darwinSystem {
+    mkDarwinSystem = { hostname, username, system }: darwin.lib.darwinSystem {
       modules = [
         ({pkgs, ...}: {
           environment.systemPackages = with pkgs; [
@@ -47,6 +47,12 @@
           home-manager.users.${username} = import ./home-manager.nix { 
             username = username;
           };
+          home-manager.extraSpecialArgs = {
+            pkgs-unstable = import nixpkgs-unstable {
+              inherit system;
+              config.allowUnfree = true;
+            }; 
+          };
         }
       ];
     };
@@ -56,14 +62,17 @@
       "Vaibhavs-MacBook-Pro" = mkDarwinSystem {
         hostname = "Vaibhavs-MacBook-Pro";
         username = "vverma";
+        system = "aarch64-darwin";
       };
       "vvscale" = mkDarwinSystem {
         hostname = "vvscale";
         username = "vaibhav.verma";
+        system = "aarch64-darwin";
       };
       "SCMM0VDYF00M0" = mkDarwinSystem {
         hostname = "SCMM0VDYF00M0";
         username = "vaibhav.verma";
+        system = "aarch64-darwin";
       };
     };
 
