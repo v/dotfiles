@@ -59,7 +59,7 @@ in {
 
     extraConfig = {
       init.defaultBranch = "main";
-      diff.tool = "nvimdiff";
+      diff.tool = "nvim -d";
       difftool.prompt = false;
       color.ui = true;
       core.filemode = false;
