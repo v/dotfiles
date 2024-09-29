@@ -353,15 +353,6 @@ in {
             config = "vim.cmd('colorscheme seoul256')";
           }
           { 
-            plugin = jellybeans-nvim; 
-            type = "lua";
-            config = ''
-            if vim.api.nvim_win_get_option(0, "diff") then
-              vim.cmd('colorscheme jellybeans-nvim')
-            end
-            '';
-          }
-          { 
             plugin = undotree; 
             type = "lua";
             config = '' vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle) '';
