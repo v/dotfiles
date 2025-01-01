@@ -30,6 +30,15 @@ let
       sha256 = "0jd62dx6qzj60az36qc8rsj6aiqfc1jg7c4fgxl5rhjcws6b3wpj";
     };
   };
+  octo_nvim = pkgs.vimUtils.buildVimPlugin {
+    name = "octo";
+    src = pkgs.fetchFromGitHub {
+      owner = "pwntester";
+      repo = "octo.nvim";
+      rev = "339e024dea88d13a1d8b04821fa2bd0defb5cf8a";
+      hash = "sha256-4vYwUhG6oZyCOfS1D8AyrTdQQMfExnvdLdXBhdlwP6M=";
+    };
+  };
 in {
   home.homeDirectory = lib.mkForce "/Users/${username}";
   home.username = username;
@@ -122,6 +131,7 @@ in {
     jq
     moreutils
     pandoc
+    ripgrep
     silver-searcher
     teleport
     tldr
@@ -300,7 +310,6 @@ in {
           vim.keymap.set("n", "qq", ":qa<cr>", {noremap=true})
         end
 
-
         '';
         plugins = with pkgs.vimPlugins; [
           { 
@@ -324,6 +333,15 @@ in {
             '';
           }
           { plugin = plenary; }
+          { 
+            plugin = octo_nvim; 
+            type = "lua";
+            config = ''
+            require'octo'.setup {
+              enable_builtin = true,
+            }
+            '';
+          }
           { 
             plugin = nvim-treesitter.withAllGrammars; 
             type = "lua";
@@ -362,7 +380,6 @@ in {
             type = "lua";
             config = ''vim.keymap.set("n", "<leader>gs", vim.cmd.Git);'';
           }
-          { plugin = copilot; }
           { plugin = nvim-web-devicons; }
           { 
             plugin = nvim-tree-lua; 
