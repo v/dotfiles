@@ -39,6 +39,15 @@ let
       hash = "sha256-4vYwUhG6oZyCOfS1D8AyrTdQQMfExnvdLdXBhdlwP6M=";
     };
   };
+  prr_vim = pkgs.vimUtils.buildVimPlugin {
+    name = "prr";
+    src = pkgs.fetchFromGitHub {
+      owner = "danobi";
+      repo = "prr";
+      rev = "v0.19.0";
+      hash = "sha256-HWMGcU/7Jw9W8BgNDPYp59+C/kxgaGktQkAkTkCMzQg=";
+    };
+  };
 in {
   home.homeDirectory = lib.mkForce "/Users/${username}";
   home.username = username;
@@ -310,6 +319,12 @@ in {
           vim.keymap.set("n", "qq", ":qa<cr>", {noremap=true})
         end
 
+        -- Try to load the local.lua file if it exists
+        local local_file = vim.fn.expand("~/.config/nvim/local.lua")
+        if vim.fn.filereadable(local_file) == 1 then
+          dofile(local_file)
+        end
+
         '';
         plugins = with pkgs.vimPlugins; [
           { 
@@ -341,6 +356,14 @@ in {
               enable_builtin = true,
             }
             '';
+          }
+          { 
+            plugin = prr_vim; 
+            runtime = {
+              "ftplugin/prr.vim".source = "${prr_vim}/vim/ftplugin/prr.vim";
+              "ftdetect/prr.vim".source = "${prr_vim}/vim/ftdetect/prr.vim";
+              "syntax/prr.vim".source = "${prr_vim}/vim/syntax/prr.vim";
+            };
           }
           { 
             plugin = nvim-treesitter.withAllGrammars; 
