@@ -3,24 +3,6 @@
 { lib, pkgs, pkgs-unstable, ... }:
 
 let  
-  telescope = pkgs.vimUtils.buildVimPlugin {
-    name = "telescope";
-    src = pkgs.fetchFromGitHub {
-      owner = "nvim-telescope";
-      repo = "telescope.nvim";
-      rev = "0.1.5";
-      sha256 = "1n28aiq1k12rvk2l1vr0wrdxb5016xz1bw8fqsc4zf15cg4nk50z";
-    };
-  };
-  plenary = pkgs.vimUtils.buildVimPlugin {
-    name = "plenary";
-    src = pkgs.fetchFromGitHub {
-      owner = "nvim-lua";
-      repo = "plenary.nvim";
-      rev = "0.1.4";
-      sha256 = "1sn7vpsbwpyndsjyxb4af8fvz4sfhlbavvw6jjsv3h18sdvkh7nd";
-    };
-  };
   copilot = pkgs.vimUtils.buildVimPlugin {
     name = "copilot";
     src = pkgs.fetchFromGitHub {
@@ -28,15 +10,6 @@ let
       repo = "copilot.vim";
       rev = "v1.24.0";
       sha256 = "0jd62dx6qzj60az36qc8rsj6aiqfc1jg7c4fgxl5rhjcws6b3wpj";
-    };
-  };
-  octo_nvim = pkgs.vimUtils.buildVimPlugin {
-    name = "octo";
-    src = pkgs.fetchFromGitHub {
-      owner = "pwntester";
-      repo = "octo.nvim";
-      rev = "339e024dea88d13a1d8b04821fa2bd0defb5cf8a";
-      hash = "sha256-4vYwUhG6oZyCOfS1D8AyrTdQQMfExnvdLdXBhdlwP6M=";
     };
   };
   prr_vim = pkgs.vimUtils.buildVimPlugin {
@@ -73,6 +46,7 @@ in {
       prt = "pr-target";
       pullr = "pull --rebase";
       rbm = "rebase -i origin/master";
+      rom = "!git fetch && git rebase origin/master";
     };
 
     extraConfig = {
@@ -319,44 +293,8 @@ in {
           vim.keymap.set("n", "qq", ":qa<cr>", {noremap=true})
         end
 
-        -- Try to load the local.lua file if it exists
-        local local_file = vim.fn.expand("~/.config/nvim/local.lua")
-        if vim.fn.filereadable(local_file) == 1 then
-          dofile(local_file)
-        end
-
         '';
         plugins = with pkgs.vimPlugins; [
-          { 
-            plugin = telescope; 
-            type = "lua";
-            config = ''
-            local builtin = require('telescope.builtin')
-            vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-            -- Find the .git directory or file in the current directory or its ancestors
-            local git_dir = vim.fn.finddir('.git', '.;')
-
-            -- If the .git directory or file is found, the current directory is a Git repository
-            if git_dir ~= ''' then
-              vim.keymap.set('n', '<C-p>', builtin.git_files, {})
-            else
-              vim.keymap.set('n', '<C-p>', builtin.find_files, {})
-            end
-            vim.keymap.set('n', '<C-h>', ':Telescope live_grep default_text=<C-r><C-w><CR>', {})
-            vim.keymap.set('n', '<leader>b', builtin.buffers, {})
-
-            '';
-          }
-          { plugin = plenary; }
-          { 
-            plugin = octo_nvim; 
-            type = "lua";
-            config = ''
-            require'octo'.setup {
-              enable_builtin = true,
-            }
-            '';
-          }
           { 
             plugin = prr_vim; 
             runtime = {
@@ -504,7 +442,20 @@ in {
               }),
             })
 
+            -- Try to load the local.lua file if it exists
+            local local_file = vim.fn.expand("~/.config/nvim/local.lua")
+            if vim.fn.filereadable(local_file) == 1 then
+              dofile(local_file)
+            end
+
             '';
+          }
+          # vim-plug is for plugins that are annoying to install using nix
+          { 
+            plugin = vim-plug; 
+            runtime = {
+              "autoload/plug.vim".source = "${vim-plug}/plug.vim";
+            };
           }
         ];
       };
