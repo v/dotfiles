@@ -34,6 +34,7 @@ in {
     aliases = {
       s = "status";
       st = "status";
+      dv = "!args=$@; shift $#; nvim +\"DiffviewOpen $args\"";
       d = "difftool";
       co = "checkout";
       l = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
@@ -104,9 +105,11 @@ in {
   home.packages = with pkgs; [
     awscli2
     bat
+    bun
     fd
     ffmpeg
     git
+    git-lfs
     htop
     httpie
     imagemagick
@@ -280,8 +283,6 @@ in {
         vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
         vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
         vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
-
-        vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
         vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.config/nvim/lua/vverma/packer.lua<CR>");
 
