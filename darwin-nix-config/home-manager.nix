@@ -117,6 +117,7 @@ in {
     jq
     moreutils
     pandoc
+    poppler_utils
     ripgrep
     silver-searcher
     teleport
