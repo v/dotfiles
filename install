@@ -18,6 +18,8 @@ ln -fs "${HOME}/dotfiles/tmux/tmux.conf"    "${HOME}/.tmux.conf"
 ln -fs "${HOME}/dotfiles/vim/vimrc"         "${HOME}/.vimrc"
 ln -fs "${HOME}/dotfiles/nvim"        "${HOME}/.config/"
 ln -fs "${HOME}/dotfiles/X/Xresources"         "${HOME}/.Xresources"
+ln -fs "${HOME}/claude/skills"         "${HOME}/.claude/skills"
+ln -fs "${HOME}/claude/commands"         "${HOME}/.claude/commands"
 ln -fs "${HOME}/dotfiles/kitty.conf"         "${HOME}/..config/kitty/kitty.conf"
 
 # Link in directories, removing whatever's already there first.

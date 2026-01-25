@@ -29,7 +29,7 @@ in {
   programs.git = {
     enable = true;
     userName = "Vaibhav Verma";
-    userEmail = "vaibhav.verma@scale.com";
+    userEmail = "627846+v@users.noreply.github.com";
 
     aliases = {
       s = "status";
