@@ -294,9 +294,10 @@ in {
           vim.keymap.set("n", "qq", ":qa<cr>", {noremap=true})
         end
 
+        -- treesitter config is handled by the plugin definition below
         '';
         plugins = with pkgs.vimPlugins; [
-          { 
+          {
             plugin = prr_vim; 
             runtime = {
               "ftplugin/prr.vim".source = "${prr_vim}/vim/ftplugin/prr.vim";
@@ -304,29 +305,7 @@ in {
               "syntax/prr.vim".source = "${prr_vim}/vim/syntax/prr.vim";
             };
           }
-          { 
-            plugin = nvim-treesitter.withAllGrammars; 
-            type = "lua";
-            config = ''
-
-            require'nvim-treesitter.configs'.setup {
-              indent = { 
-                enable = true
-              },
-
-              highlight = {
-                enable = true,
-
-                -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-                -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-                -- Using this option may slow down your editor, and you may see some duplicate highlights.
-                -- Instead of true it can also be a list of languages
-                additional_vim_regex_highlighting = false,
-              },
-            }
-
-            '';
-          }
+          { plugin = nvim-treesitter.withAllGrammars; }
           { 
             plugin = seoul256-vim; 
             type = "lua";
@@ -442,6 +421,17 @@ in {
                 ['<S-Tab>'] = nil,
               }),
             })
+
+            -- Setup treesitter
+            pcall(function()
+              require'nvim-treesitter.configs'.setup {
+                indent = { enable = true },
+                highlight = {
+                  enable = true,
+                  additional_vim_regex_highlighting = false,
+                },
+              }
+            end)
 
             -- Try to load the local.lua file if it exists
             local local_file = vim.fn.expand("~/.config/nvim/local.lua")
