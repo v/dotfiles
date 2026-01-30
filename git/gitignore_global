@@ -1,6 +1,0 @@
-.*.swp
-*.pyc
-*.o
-tags.tmp
-tags
-.mypy_cache

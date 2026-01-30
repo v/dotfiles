@@ -1,7 +1,0 @@
-if [ -f /etc/profile ]; then
-    source /etc/profile
-fi
-
-command -v brew > /dev/null 2>&1 && eval "$(brew shellenv)"
-
-source $HOME/.bashrc
