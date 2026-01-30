@@ -16,7 +16,7 @@
 
   outputs = inputs@{ self, darwin, nixpkgs, nixpkgs-unstable, home-manager }:
   let
-    mkDarwinSystem = { hostname, username, system }: darwin.lib.darwinSystem {
+    mkDarwinSystem = { hostname, username, system, gitEmail }: darwin.lib.darwinSystem {
       modules = [
         ({pkgs, ...}: {
           environment.systemPackages = with pkgs; [
@@ -44,8 +44,9 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.${username} = import ./home-manager.nix { 
+          home-manager.users.${username} = import ./home-manager.nix {
             username = username;
+            gitEmail = gitEmail;
           };
           home-manager.extraSpecialArgs = {
             pkgs-unstable = import nixpkgs-unstable {
@@ -63,21 +64,25 @@
         hostname = "Vaibhavs-MacBook-Pro";
         username = "vverma";
         system = "aarch64-darwin";
+        gitEmail = "627846+v@users.noreply.github.com";
       };
       "nectar" = mkDarwinSystem {
         hostname = "nectar";
         username = "vaibhav";
         system = "aarch64-darwin";
+        gitEmail = "vaibhav@nectarsocial.com";
       };
       "vvscale" = mkDarwinSystem {
         hostname = "vvscale";
         username = "vaibhav.verma";
         system = "aarch64-darwin";
+        gitEmail = "627846+v@users.noreply.github.com";
       };
       "SCMM0VDYF00M0" = mkDarwinSystem {
         hostname = "SCMM0VDYF00M0";
         username = "vaibhav.verma";
         system = "aarch64-darwin";
+        gitEmail = "627846+v@users.noreply.github.com";
       };
     };
 

@@ -1,8 +1,8 @@
-{ username, ... }:
+{ username, gitEmail, ... }:
 
 { lib, pkgs, pkgs-unstable, ... }:
 
-let  
+let
   copilot = pkgs.vimUtils.buildVimPlugin {
     name = "copilot";
     src = pkgs.fetchFromGitHub {
@@ -29,7 +29,7 @@ in {
   programs.git = {
     enable = true;
     userName = "Vaibhav Verma";
-    userEmail = "627846+v@users.noreply.github.com";
+    userEmail = gitEmail;
 
     aliases = {
       s = "status";
