@@ -4,39 +4,10 @@ set -eu
 
 cd "${HOME}"
 
-mkdir -p "${HOME}/.config/nvim"
-mkdir -p "${HOME}/.config/kitty"
-
 # Link in files, replacing whatever's already there.
-ln -fs "${HOME}/dotfiles/bash/bashrc"       "${HOME}/.bashrc"
-ln -fs "${HOME}/dotfiles/bash/bash_profile" "${HOME}/.bash_profile"
-ln -fs "${HOME}/dotfiles/X/Xmodmap" "${HOME}/.Xmodmap"
-ln -fs "${HOME}/dotfiles/git/gitconfig"     "${HOME}/.gitconfig"
-ln -fs "${HOME}/dotfiles/git/gitignore_global"     "${HOME}/.gitignore_global"
-ln -fs "${HOME}/dotfiles/npm/npmrc"         "${HOME}/.npmrc"
-ln -fs "${HOME}/dotfiles/tmux/tmux.conf"    "${HOME}/.tmux.conf"
-ln -fs "${HOME}/dotfiles/vim/vimrc"         "${HOME}/.vimrc"
-ln -fs "${HOME}/dotfiles/nvim"        "${HOME}/.config/"
-ln -fs "${HOME}/dotfiles/X/Xresources"         "${HOME}/.Xresources"
-ln -fs "${HOME}/claude/skills"         "${HOME}/.claude/skills"
-ln -fs "${HOME}/claude/commands"         "${HOME}/.claude/commands"
-ln -fs "${HOME}/dotfiles/kitty.conf"         "${HOME}/..config/kitty/kitty.conf"
+ln -fs "${HOME}/dotfiles/claude/skills"         "${HOME}/.claude/skills"
+ln -fs "${HOME}/dotfiles/claude/commands"         "${HOME}/.claude/commands"
 
-# Link in directories, removing whatever's already there first.
-if [ -e "${HOME}/.vim/bundle" ]; then
-    rm -rf "${HOME}/.vim/bundle"
-fi
-
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-mkdir -p "${HOME}/.gconf/apps/gnome-terminal/profiles/Default"
-ln -fs "${HOME}/dotfiles/X/gnome-terminal-conf.xml" "${HOME}/.gconf/apps/gnome-terminal/profiles/Default/%gconf.xml"
-
-mkdir -p "${HOME}/.vim/UltiSnips"
-ln -fs "${HOME}/dotfiles/vim/gitrebase.snippets" "${HOME}/.vim/UltiSnips/gitrebase.snippets"
-
-mkdir -p "${HOME}/bin"
 ln -fs ${HOME}/dotfiles/bin/git-push-to-target ${HOME}/bin/git-push-to-target
 ln -fs ${HOME}/dotfiles/bin/git-pr-target ${HOME}/bin/git-pr-target
 

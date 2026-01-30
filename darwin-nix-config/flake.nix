@@ -64,6 +64,11 @@
         username = "vverma";
         system = "aarch64-darwin";
       };
+      "nectar" = mkDarwinSystem {
+        hostname = "nectar";
+        username = "vaibhav";
+        system = "aarch64-darwin";
+      };
       "vvscale" = mkDarwinSystem {
         hostname = "vvscale";
         username = "vaibhav.verma";
