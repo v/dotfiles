@@ -117,6 +117,7 @@ in {
     jq
     moreutils
     pandoc
+    postgresql
     poppler_utils
     ripgrep
     silver-searcher
@@ -124,7 +125,6 @@ in {
     tldr
     tree
     unzip
-    visidata
     zip
     yq-go
   ];
