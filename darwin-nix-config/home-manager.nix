@@ -106,6 +106,7 @@ in {
     awscli2
     bat
     bun
+    clickhouse
     fd
     ffmpeg
     git
