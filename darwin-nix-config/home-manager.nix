@@ -121,7 +121,7 @@ in {
     poppler_utils
     ripgrep
     silver-searcher
-    teleport
+
     tldr
     tree
     unzip
