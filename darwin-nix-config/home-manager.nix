@@ -46,8 +46,8 @@ in {
       can = "commit -a --amend --no-edit";
       prt = "pr-target";
       pullr = "pull --rebase";
-      rbm = "rebase -i origin/master";
-      rom = "!git fetch && git rebase origin/master";
+      rbm = "rebase -i origin/main";
+      rom = "!git fetch && git rebase origin/main";
     };
 
     extraConfig = {
