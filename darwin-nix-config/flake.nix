@@ -37,7 +37,7 @@
 
           users.users.${username} = {
             home = "/Users/${username}";
-            shell = pkgs.bash;
+            shell = pkgs.bashInteractive;
           };
         })
         home-manager.darwinModules.home-manager

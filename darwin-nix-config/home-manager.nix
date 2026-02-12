@@ -307,8 +307,7 @@ in {
               "syntax/prr.vim".source = "${prr_vim}/vim/syntax/prr.vim";
             };
           }
-          { plugin = nvim-treesitter.withAllGrammars; }
-          { 
+          {
             plugin = seoul256-vim; 
             type = "lua";
             config = "vim.cmd('colorscheme seoul256')";
@@ -373,55 +372,39 @@ in {
             config = ''vim.keymap.set("n", "<leader>f", function() vim.cmd("Prettier") end)'';
           }
 
-          # lsp plugins
-          { plugin = nvim-lspconfig; }
-          { plugin = mason-nvim; }
-          { plugin = mason-lspconfig-nvim; }
-          { plugin = nvim-cmp; }
-          { plugin = cmp-nvim-lsp; }
+          # Built-in LSP configuration
           {
-            plugin = lsp-zero-nvim;
+            plugin = nvim-treesitter.withAllGrammars;
             type="lua";
             config = ''
-            local lsp_zero = require('lsp-zero')
+            -- LSP keybindings (attached when LSP client connects)
+            vim.api.nvim_create_autocmd('LspAttach', {
+              callback = function(args)
+                local opts = {buffer = args.buf, remap = false}
 
-            lsp_zero.on_attach(function(client, bufnr)
-            local opts = {buffer = bufnr, remap = false}
+                vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+                vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+                vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+                vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+                vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
+                vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+                vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
+                vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
+                vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
+                vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+              end,
+            })
 
-            vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-            vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-            vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-            vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-            vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-            vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-            vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-            vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-            vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-            vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-            end)
-
-            -- When you don't have mason.nvim installed
-            -- You'll need to list the servers installed in your system
-            lsp_zero.setup_servers({'tsserver', 'eslint', 'pyright'})
-            lsp_zero.setup()
-
-
-            -- Completions
-            local cmp = require('cmp')
-            local cmp_select = {behavior = cmp.SelectBehavior.Select}
-
-            cmp.setup({
-              -- not sure why this doesn't work
-              -- formatting = lsp_zero.cmp_format(),
-              mapping = cmp.mapping.preset.insert({
-                ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-                ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-                ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-                ['<CR>'] = cmp.mapping.confirm({ select = true }),
-                ['<C-Space>'] = cmp.mapping.complete(),
-                ['Tab'] = nil,
-                ['<S-Tab>'] = nil,
-              }),
+            -- Auto-start LSP servers for Python files
+            vim.api.nvim_create_autocmd('FileType', {
+              pattern = 'python',
+              callback = function()
+                vim.lsp.start({
+                  name = 'pyright',
+                  cmd = {'pyright-langserver', '--stdio'},
+                  root_dir = vim.fs.dirname(vim.fs.find({'setup.py', 'pyproject.toml', 'requirements.txt', '.git'}, { upward = true })[1]),
+                })
+              end,
             })
 
             -- Setup treesitter
