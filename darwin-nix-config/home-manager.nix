@@ -25,6 +25,11 @@ in {
   home.homeDirectory = lib.mkForce homeDirectory;
   home.username = username;
 
+  home.sessionVariables = {
+    LANG = "en_US.UTF-8";
+    LC_ALL = "en_US.UTF-8";
+  };
+
   # Example Home Manager configuration
   programs.git = {
     enable = true;
@@ -111,6 +116,7 @@ in {
     ffmpeg
     git
     git-lfs
+    graphite-cli
     htop
     httpie
     imagemagick
