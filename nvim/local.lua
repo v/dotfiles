@@ -1,14 +1,22 @@
-local vim = vim
+-- Using built-in Neovim LSP (no lsp-zero or other LSP plugins)
+
+local data_dir = vim.fn.stdpath('data') .. '/site'
+if vim.fn.empty(vim.fn.glob(data_dir .. '/autoload/plug.vim')) == 1 then
+  vim.fn.system('curl -fLo ' .. data_dir .. '/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
+  vim.api.nvim_create_autocmd('VimEnter', {
+    command = 'PlugInstall --sync | source $MYVIMRC'
+  })
+end
+
+-- Plugin installation
 local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
-
--- Core dependencies first
 Plug('nvim-lua/plenary.nvim')
-Plug('nvim-telescope/telescope.nvim', { tag = '0.1.8' })
+Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.8' })
 
 -- Then plugins that depend on them
-Plug('pwntester/octo.nvim', {
+Plug('v/octo.nvim', {
     requires = {
         'nvim-lua/plenary.nvim',
         'nvim-tree/nvim-web-devicons',
@@ -17,25 +25,23 @@ Plug('pwntester/octo.nvim', {
 })
 
 Plug('knsh14/vim-github-link')
-
 vim.call('plug#end')
 
--- Telescope configuration
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set({'n', 'v'}, '<leader>gh', ':GetCurrentBranchLink<CR>', {})
+-- Telescope setup (only if plugin is installed)
+local ok, telescope = pcall(require, "telescope")
+if ok then
+  telescope.setup {}
 
--- Find the .git directory or file in the current directory or its ancestors
-local git_dir = vim.fn.finddir('.git', '.;')
-
--- If the .git directory or file is found, the current directory is a Git repository
-if git_dir ~= '' then
-    vim.keymap.set('n', '<C-p>', builtin.git_files, {})
-else
-    vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+  local builtin = require('telescope.builtin')
+  vim.keymap.set('n', '<C-p>', builtin.find_files, { desc = 'Find files' })
+  vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Find buffers' })
+  vim.keymap.set('n', '<C-h>', function()
+    builtin.live_grep({ default_text = vim.fn.expand('<cword>') })
+  end, { desc = 'Live grep word under cursor' })
 end
-vim.keymap.set('n', '<C-h>', ':Telescope live_grep default_text=<C-r><C-w><CR>', {})
-vim.keymap.set('n', '<leader>b', builtin.buffers, {})
+
+-- Enable tsgo for TypeScript/JavaScript (after plugins are loaded)
+vim.lsp.enable('tsgo')
 
 -- Configure octo.nvim
 require('octo').setup({
