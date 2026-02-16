@@ -1,4 +1,4 @@
-{ username, gitEmail, ... }:
+{ username, gitEmail, homeDirectory, ... }:
 
 { lib, pkgs, pkgs-unstable, ... }:
 
@@ -22,7 +22,7 @@ let
     };
   };
 in {
-  home.homeDirectory = lib.mkForce "/Users/${username}";
+  home.homeDirectory = lib.mkForce homeDirectory;
   home.username = username;
 
   # Example Home Manager configuration

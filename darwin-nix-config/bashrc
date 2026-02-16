@@ -46,5 +46,8 @@ LS_OPTS="--color=auto"
 
 alias ls="ls ${LS_OPTS}"
 alias grep="grep ${GREP_OPTS}"
+alias cy="claude --dangerously-skip-permissions"
+alias h="claude --model haiku --dangerously-skip-permissions"
+alias s="claude --model sonnet --dangerously-skip-permissions"
 
 [[ -e ~/.bashrc.local ]] && source ~/.bashrc.local

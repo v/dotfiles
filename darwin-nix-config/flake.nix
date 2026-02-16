@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
+    nixpkgs-linux.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-24.11";
@@ -14,7 +15,7 @@
     };
   };
 
-  outputs = inputs@{ self, darwin, nixpkgs, nixpkgs-unstable, home-manager }:
+  outputs = inputs@{ self, darwin, nixpkgs, nixpkgs-linux, nixpkgs-unstable, home-manager }:
   let
     mkDarwinSystem = { hostname, username, system, gitEmail }: darwin.lib.darwinSystem {
       modules = [
@@ -47,6 +48,7 @@
           home-manager.users.${username} = import ./home-manager.nix {
             username = username;
             gitEmail = gitEmail;
+            homeDirectory = "/Users/${username}";
           };
           home-manager.extraSpecialArgs = {
             pkgs-unstable = import nixpkgs-unstable {
@@ -88,5 +90,27 @@
 
     # Expose the package set, including overlays, for convenience.
     darwinPackages = builtins.mapAttrs (hostname: config: config.pkgs) self.darwinConfigurations;
+
+    homeConfigurations = {
+      "exedev" = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs-linux {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+        modules = [
+          (import ./home-manager.nix {
+            username = "exedev";
+            gitEmail = "627846+v@users.noreply.github.com";
+            homeDirectory = "/home/exedev";
+          })
+        ];
+        extraSpecialArgs = {
+          pkgs-unstable = import nixpkgs-unstable {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+        };
+      };
+    };
   };
 }
