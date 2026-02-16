@@ -10,3 +10,5 @@ ln -fs "${HOME}/dotfiles/claude/commands"         "${HOME}/.claude/commands"
 
 ln -fs ${HOME}/dotfiles/bin/git-push-to-target ${HOME}/bin/git-push-to-target
 ln -fs ${HOME}/dotfiles/bin/git-pr-target ${HOME}/bin/git-pr-target
+
+ln -fs ${HOME}/dotfiles/nvim/local.lua ${HOME}/.config/nvim/local.lua
