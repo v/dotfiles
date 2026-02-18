@@ -50,4 +50,9 @@ alias cy="claude --dangerously-skip-permissions"
 alias h="claude --model haiku --dangerously-skip-permissions"
 alias s="claude --model sonnet --dangerously-skip-permissions"
 
+review() {
+    gh pr checkout $1
+    vi '+Octo pr edit $1'
+}
+
 [[ -e ~/.bashrc.local ]] && source ~/.bashrc.local

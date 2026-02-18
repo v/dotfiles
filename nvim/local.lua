@@ -40,6 +40,9 @@ if ok then
   end, { desc = 'Live grep word under cursor' })
 end
 
+-- Get current branch GitHub link
+vim.keymap.set('n', '<leader>gh', '<cmd>GetCurrentBranchLink<CR>', { desc = 'Get current branch GitHub link' })
+
 -- Enable tsgo for TypeScript/JavaScript (after plugins are loaded)
 vim.lsp.enable('tsgo')
 
