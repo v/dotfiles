@@ -91,17 +91,16 @@
     # Expose the package set, including overlays, for convenience.
     darwinPackages = builtins.mapAttrs (hostname: config: config.pkgs) self.darwinConfigurations;
 
-    homeConfigurations = {
-      "exedev" = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations = let
+      mkLinuxHome = { username, gitEmail }: home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs-linux {
           system = "x86_64-linux";
           config.allowUnfree = true;
         };
         modules = [
           (import ./home-manager.nix {
-            username = "exedev";
-            gitEmail = "627846+v@users.noreply.github.com";
-            homeDirectory = "/home/exedev";
+            inherit username gitEmail;
+            homeDirectory = "/home/${username}";
           })
         ];
         extraSpecialArgs = {
@@ -111,6 +110,17 @@
           };
         };
       };
-    };
+      currentUser = builtins.getEnv "USER";
+    in {
+      "exedev" = mkLinuxHome {
+        username = "exedev";
+        gitEmail = "627846+v@users.noreply.github.com";
+      };
+    } // (if currentUser != "" then {
+      "${currentUser}" = mkLinuxHome {
+        username = currentUser;
+        gitEmail = "627846+v@users.noreply.github.com";
+      };
+    } else {});
   };
 }
