@@ -24,7 +24,7 @@ Plug('v/octo.nvim', {
     }
 })
 
-Plug('knsh14/vim-github-link')
+Plug('tpope/vim-rhubarb')
 vim.call('plug#end')
 
 -- Telescope setup (only if plugin is installed)
@@ -40,8 +40,20 @@ if ok then
   end, { desc = 'Live grep word under cursor' })
 end
 
--- Get current branch GitHub link
-vim.keymap.set('n', '<leader>gh', '<cmd>GetCurrentBranchLink<CR>', { desc = 'Get current branch GitHub link' })
+-- Detect default branch (main or master)
+local function default_branch()
+  local ref = vim.fn.system('git symbolic-ref refs/remotes/origin/HEAD'):gsub('%s+', '')
+  return ref:match('refs/remotes/origin/(.+)') or 'main'
+end
+local _default_branch = default_branch()
+
+-- Get default branch GitHub link (normal: current line, visual: selected range)
+vim.keymap.set('n', '<leader>gh', function()
+  vim.cmd('.GBrowse! origin/' .. _default_branch .. ':%')
+end, { desc = 'Copy default branch GitHub link' })
+vim.keymap.set('v', '<leader>gh', function()
+  vim.cmd("'<,'>GBrowse! origin/" .. _default_branch .. ':%')
+end, { desc = 'Copy default branch GitHub link (range)' })
 
 -- Enable tsgo for TypeScript/JavaScript (after plugins are loaded)
 vim.lsp.enable('tsgo')
