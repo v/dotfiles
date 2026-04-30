@@ -108,7 +108,7 @@ in {
   };
 
   home.packages = with pkgs; [
-    awscli2
+    pkgs-unstable.awscli2
     bat
     bun
     clickhouse
@@ -116,6 +116,7 @@ in {
     ffmpeg
     git
     git-lfs
+    google-cloud-sdk
     graphite-cli
     htop
     httpie
