@@ -116,6 +116,11 @@
         username = "exedev";
         gitEmail = "627846+v@users.noreply.github.com";
       };
+      # Used by the modal dev-sandbox image (build_image.py).
+      "ubuntu" = mkLinuxHome {
+        username = "ubuntu";
+        gitEmail = "vaibhav@nectarsocial.com";
+      };
     } // (if currentUser != "" then {
       "${currentUser}" = mkLinuxHome {
         username = currentUser;
