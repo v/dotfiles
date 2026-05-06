@@ -58,8 +58,9 @@ end, { desc = 'Copy default branch GitHub link (range)' })
 -- Enable tsgo for TypeScript/JavaScript (after plugins are loaded)
 vim.lsp.enable('tsgo')
 
--- Configure octo.nvim
-require('octo').setup({
+-- Configure octo.nvim (guarded so first-run before PlugInstall doesn't error)
+local octo_ok, octo = pcall(require, 'octo')
+if octo_ok then octo.setup({
     enable_builtin = true,
     mappings = {
         pull_request = {
@@ -85,5 +86,5 @@ require('octo').setup({
           goto_file = { lhs = "gf", desc = "go to file" },
         },
     }
-})
+}) end
 
