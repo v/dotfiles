@@ -317,7 +317,7 @@ in {
           {
             plugin = seoul256-vim; 
             type = "lua";
-            config = "vim.cmd('colorscheme seoul256')";
+            config = "vim.cmd('silent! colorscheme seoul256')";
           }
           { 
             plugin = undotree; 
@@ -334,6 +334,7 @@ in {
             plugin = nvim-tree-lua; 
             type = "lua";
             config = ''
+            vim.api.nvim_create_augroup('FileExplorer', { clear = false })
             require("nvim-tree").setup({
               disable_netrw = true,
               hijack_netrw = true,
