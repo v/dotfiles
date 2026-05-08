@@ -224,7 +224,12 @@ in {
         viAlias = true;
         vimdiffAlias = true;
         defaultEditor = true;
-        package = pkgs-unstable.neovim-unwrapped;
+        # On Linux, use the stable channel's neovim (0.10.x in nixpkgs 24.11).
+        # nvim 0.11.x from unstable links against a libuv that requires kernel
+        # syscalls (statx, TIOCGPTPEER, etc.) not present on older kernels like
+        # the 4.4 kernel used by the Modal dev sandbox — the TUI fails to
+        # initialize and nvim exits silently. 0.10.x works on those hosts.
+        package = if pkgs.stdenv.isLinux then pkgs.neovim-unwrapped else pkgs-unstable.neovim-unwrapped;
         extraLuaConfig = ''
         vim.opt.guicursor = ""
         vim.opt.nu = true
