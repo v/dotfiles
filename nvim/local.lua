@@ -55,6 +55,27 @@ vim.keymap.set('v', '<leader>gh', function()
   vim.cmd("'<,'>GBrowse! origin/" .. _default_branch .. ':%')
 end, { desc = 'Copy default branch GitHub link (range)' })
 
+-- TypeScript 7 ships the Go language server as `tsc --lsp`. Prefer the
+-- project's pinned `tsc`, so the server matches the repo's compiler version.
+vim.lsp.config('tsgo', {
+  cmd = function(dispatchers, config)
+    local root = config.root_dir
+    local tsc = root and vim.fs.find('node_modules/.bin/tsc', { path = root, upward = true })[1]
+    local cmd = (tsc and vim.fn.executable(tsc) == 1) and { tsc, '--lsp', '--stdio' }
+      or { 'tsgo', '--lsp', '--stdio' }
+    return vim.lsp.rpc.start(cmd, dispatchers, { cwd = root })
+  end,
+  filetypes = {
+    'javascript',
+    'javascriptreact',
+    'javascript.jsx',
+    'typescript',
+    'typescriptreact',
+    'typescript.tsx',
+  },
+  root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git', 'tsconfig.base.json' },
+})
+
 -- Enable tsgo for TypeScript/JavaScript (after plugins are loaded)
 vim.lsp.enable('tsgo')
 
