@@ -73,7 +73,12 @@ vim.lsp.config('tsgo', {
     'typescriptreact',
     'typescript.tsx',
   },
-  root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git', 'tsconfig.base.json' },
+  -- A lockfile marks the workspace root, so one server serves every package of a monorepo.
+  root_markers = {
+    { 'pnpm-lock.yaml', 'package-lock.json', 'yarn.lock', 'bun.lock', 'bun.lockb' },
+    { 'tsconfig.json', 'jsconfig.json', 'package.json', 'tsconfig.base.json' },
+    '.git',
+  },
 })
 
 -- Enable tsgo for TypeScript/JavaScript (after plugins are loaded)
